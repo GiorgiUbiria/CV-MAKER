@@ -1,6 +1,21 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import { Typography } from "@mui/material";
+
+function CustomHelperText({ helperText }: any) {
+  return (
+    <Typography variant="body2" color="textSecondary">
+      {helperText}
+    </Typography>
+  );
+}
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react";
+
+const element = <FontAwesomeIcon icon={faTriangleExclamation} />;
 
 interface FormValues {
   name: string;
@@ -56,7 +71,7 @@ const validate = (values: FormValues) => {
 
   if (!values.email) {
     errors.email = "Email is required";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+  } else if (!/^[A-Z0-9._%+-]+@redberry+\.[A-Z]{2,}$/i.test(values.email)) {
     errors.email = "Invalid email address";
   } else {
     delete errors.email;
@@ -74,54 +89,142 @@ const validate = (values: FormValues) => {
   return errors;
 };
 
-const MyForm = () => (
-  <Formik
-    initialValues={{
-      name: "",
-      surname: "",
-      image: "",
-      aboutMe: "",
-      email: "",
-      phoneNumber: "",
-    }}
-    validate={validate}
-    onSubmit={(values, { setSubmitting }) => {
-      setTimeout(() => {
-        alert(JSON.stringify(values, null, 2));
-        setSubmitting(false);
-      }, 400);
-    }}
-  >
-    {({ isSubmitting }) => (
-      <Form style={{ display: "flex", flexDirection: "column" }}>
-        <Field as={TextField} type="text" name="name" placeholder="Name" />
-        <ErrorMessage name="name" component="div" />
-        <Field
-          as={TextField}
-          type="text"
-          name="surname"
-          placeholder="Surname"
-        />
-        <ErrorMessage name="surname" component="div" />
-        <Field type="file" name="image" />
-        <ErrorMessage name="image" component="div" />
-        <Field as={TextField} multiple name="aboutMe" placeholder="About Me" />
-        <ErrorMessage name="aboutMe" component="div" />
-        <Field as={TextField} type="email" name="email" placeholder="Email" />
-        <ErrorMessage name="email" component="div" />
-        <Field
-          as={TextField}
-          type="text"
-          name="phoneNumber"
-          placeholder="Phone Number"
-        />
-        <ErrorMessage name="phoneNumber" component="div" />
-        <Button type="submit" disabled={isSubmitting}>
-          Submit
-        </Button>
-      </Form>
-    )}
-  </Formik>
-);
+const initialValues = {
+  name: "",
+  surname: "",
+  image: "",
+  aboutMe: "",
+  email: "",
+  phoneNumber: "",
+};
+
+const MyForm = () => {
+  const [values, setValues] = useState(
+    JSON.parse(localStorage.getItem("formValues") as string) || initialValues
+  );
+
+  useEffect(() => {
+    localStorage.setItem("formValues", JSON.stringify(values));
+  }, [values]);
+
+  return (
+    <Formik
+      initialValues={values}
+      validate={validate}
+      onSubmit={(values, { setSubmitting }) => {
+        setTimeout(() => {
+          alert(JSON.stringify(values, null, 2));
+          setSubmitting(false);
+        }, 400);
+      }}
+    >
+      {({ isSubmitting }) => (
+        <Form style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+          <div className="name_field" style={{ display: "flex", gap: "1rem" }}>
+            <Field
+              name="name"
+              render={({ field, form }: any) => (
+                <div
+                  style={{ display: "flex", alignItems: "center", gap: "10px" }}
+                >
+                  <TextField
+                    {...field}
+                    error={form.errors.name && form.touched.name}
+                  />
+                  <CustomHelperText
+                    helperText={
+                      form.errors.name && form.touched.name ? element : null
+                    }
+                  />
+                </div>
+              )}
+            />
+            <Field
+              name="surname"
+              render={({ field, form }: any) => (
+                <div
+                  style={{ display: "flex", alignItems: "center", gap: "10px" }}
+                >
+                  <TextField
+                    {...field}
+                    error={form.errors.surname && form.touched.surname}
+                  />
+                  <CustomHelperText
+                    helperText={
+                      form.errors.surname && form.touched.surname
+                        ? element
+                        : null
+                    }
+                  />
+                </div>
+              )}
+            />
+          </div>
+          <Field type="file" name="image" />
+          <ErrorMessage name="image" component="div" />
+          <Field
+            name="aboutMe"
+            render={({ field, form }: any) => (
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "10px" }}
+              >
+                <TextField
+                  {...field}
+                  error={form.errors.aboutMe && form.touched.aboutMe}
+                />
+                <CustomHelperText
+                  helperText={
+                    form.errors.aboutMe && form.touched.aboutMe ? element : null
+                  }
+                />
+              </div>
+            )}
+          />
+          <Field
+            name="email"
+            render={({ field, form }: any) => (
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "10px" }}
+              >
+                <TextField
+                  {...field}
+                  error={form.errors.email && form.touched.email}
+                />
+                <CustomHelperText
+                  helperText={
+                    form.errors.email && form.touched.email ? element : null
+                  }
+                />
+              </div>
+            )}
+          />
+          <Field
+            name="phoneNumber"
+            render={({ field, form }: any) => (
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "10px" }}
+              >
+                <TextField
+                  {...field}
+                  error={form.errors.phoneNumber && form.touched.phoneNumber}
+                />
+                <CustomHelperText
+                  helperText={
+                    form.errors.phoneNumber && form.touched.phoneNumber
+                      ? element
+                      : null
+                  }
+                />
+              </div>
+            )}
+          />
+          <Button type="submit" disabled={isSubmitting}>
+            Submit
+          </Button>
+        </Form>
+      )}
+    </Formik>
+  );
+};
 
 export default MyForm;
