@@ -21,6 +21,7 @@ export const Main = () => {
           className="add_resume_btn"
           type="submit"
           onClick={handleButtonClick}
+          style={{ cursor: "pointer" }}
         >
           {" "}
           რეზიუმეს დამატება{" "}

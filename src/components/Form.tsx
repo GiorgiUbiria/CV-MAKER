@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -113,63 +112,71 @@ const Form: React.FC = () => {
         marginLeft: "100px",
       }}
     >
-      <div className="name_fields" style={{ display: "flex", gap: "6rem" }}>
+      <div className="name_fields" style={{ display: "flex", gap: "5rem" }}>
         <TextField
-          label="Name"
+          label="სახელი"
           name="name"
           value={values.name}
           onChange={handleChange}
           error={!!errors.name}
           helperText={errors.name && element}
           style={{ width: "30%" }}
+          required
         />
         <TextField
-          label="Surname"
+          label="გვარი"
           name="surname"
           value={values.surname}
           onChange={handleChange}
           error={!!errors.surname}
           helperText={errors.surname && element}
           style={{ width: "30%" }}
+          required
         />
       </div>
+      
       <TextField
-        label="About Me"
+        label="ჩემს შესახებ"
         name="aboutMe"
         value={values.aboutMe}
         onChange={handleChange}
         error={!!errors.aboutMe}
         helperText={errors.aboutMe && element}
         style={{ width: "70%" }}
+        multiline
       />
       <TextField
-        label="Email"
+        label="ელექტრონული ფოსტა"
         name="email"
         value={values.email}
         onChange={handleChange}
         error={!!errors.email}
         helperText={errors.email && element}
         style={{ width: "70%" }}
+        required
       />
       <TextField
-        label="Phone Number"
+        label="ტელეფონის ნომერი"
         name="phoneNumber"
         value={values.phoneNumber}
         onChange={handleChange}
         error={!!errors.phoneNumber}
         helperText={errors.phoneNumber && element}
         style={{ width: "70%" }}
+        required
       />
       <Button
         type="submit"
+        variant="contained"
         style={{
           width: "15%",
           position: "relative",
           top: "100px",
-          left: "700px",
+          left: "565px",
+          backgroundColor: "#6B40E3",
         }}
       >
-        Submit
+        შემდეგი
       </Button>
     </form>
   );
