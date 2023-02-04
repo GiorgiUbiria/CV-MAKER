@@ -1,5 +1,9 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+
 import Form from "../components/Form";
+import CVDisplay from "../components/CVDisplay";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 
@@ -7,9 +11,17 @@ import "./GeneralInformation.css";
 
 const element = <FontAwesomeIcon icon={faAngleLeft} />;
 
+
+
 const GeneralInformation = () => {
+  const [dataFromChild, setDataFromChild] = useState(null);
+
+  const handleDataFromChild = (data: any) => {
+    setDataFromChild(data);
+  };
+
   return (
-    <>
+    <div className="container">
       <Link
         to="/"
         style={{
@@ -34,10 +46,12 @@ const GeneralInformation = () => {
           პირადი ინფორმაცია{" "}
         </h1>
         <hr />
-        <Form />
+        <Form onDataFromChild={handleDataFromChild} />
       </div>
-      <div className="cv"></div>
-    </>
+      <div className="cv">
+        <CVDisplay values={dataFromChild} />
+      </div>
+    </div>
   );
 };
 

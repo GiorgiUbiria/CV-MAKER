@@ -1,10 +1,17 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 
 const element = <FontAwesomeIcon icon={faTriangleExclamation} />;
+
+interface FormProps extends React.HTMLAttributes<HTMLFormElement> {
+  onDataFromChild: (data: any) => void;
+}
 
 interface FormValues {
   name: string;
@@ -76,7 +83,25 @@ const validate = (values: FormValues) => {
   return errors;
 };
 
-const Form: React.FC = () => {
+const Form: React.FC<FormProps> = ({ onDataFromChild }: any) => {
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    navigate("/experience");
+  };
+
+  const [fieldErrors, setFieldErrors] = useState({
+    name: false,
+    surname: false,
+    aboutMe: false,
+    email: false,
+    phoneNumber: false,
+  });
+
+  const handleBlur = (field: string) => () => {
+    setFieldErrors({ ...fieldErrors, [field]: true });
+  };
+
   const initialValues = {
     name: "",
     surname: "",
@@ -86,11 +111,20 @@ const Form: React.FC = () => {
     phoneNumber: "",
   };
 
-  const [values, setValues] = useState(initialValues);
+  const [values, setValues] = useState(() => {
+    const storedValues = localStorage.getItem("form-data");
+    return storedValues ? JSON.parse(storedValues) : initialValues;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("form-data", JSON.stringify(values));
+  }, [values]);
+
   const [errors, setErrors] = useState({} as { [key: string]: string });
 
   useEffect(() => {
     setErrors(validate(values));
+    onDataFromChild(values);
   }, [values]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -108,7 +142,7 @@ const Form: React.FC = () => {
       style={{
         display: "flex",
         flexDirection: "column",
-        gap: "1rem",
+        gap: "3rem",
         marginLeft: "100px",
       }}
     >
@@ -118,8 +152,9 @@ const Form: React.FC = () => {
           name="name"
           value={values.name}
           onChange={handleChange}
-          error={!!errors.name}
-          helperText={errors.name && element}
+          error={!!errors.name && fieldErrors.name}
+          helperText={fieldErrors.name && errors.name ? element : null}
+          onBlur={handleBlur("name")}
           style={{ width: "30%" }}
           required
         />
@@ -128,21 +163,23 @@ const Form: React.FC = () => {
           name="surname"
           value={values.surname}
           onChange={handleChange}
-          error={!!errors.surname}
-          helperText={errors.surname && element}
+          error={!!errors.surname && fieldErrors.surname}
+          helperText={fieldErrors.surname && errors.surname ? element : null}
           style={{ width: "30%" }}
+          onBlur={handleBlur("surname")}
           required
         />
       </div>
-      
+
       <TextField
         label="ჩემს შესახებ"
         name="aboutMe"
         value={values.aboutMe}
         onChange={handleChange}
-        error={!!errors.aboutMe}
-        helperText={errors.aboutMe && element}
+        error={!!errors.aboutMe && fieldErrors.aboutMe}
+        helperText={fieldErrors.aboutMe && errors.aboutMe ? element : null}
         style={{ width: "70%" }}
+        onBlur={handleBlur("aboutMe")}
         multiline
       />
       <TextField
@@ -150,9 +187,10 @@ const Form: React.FC = () => {
         name="email"
         value={values.email}
         onChange={handleChange}
-        error={!!errors.email}
-        helperText={errors.email && element}
+        error={!!errors.email && fieldErrors.email}
+        helperText={fieldErrors.email && errors.email ? element : null}
         style={{ width: "70%" }}
+        onBlur={handleBlur("email")}
         required
       />
       <TextField
@@ -160,13 +198,15 @@ const Form: React.FC = () => {
         name="phoneNumber"
         value={values.phoneNumber}
         onChange={handleChange}
-        error={!!errors.phoneNumber}
-        helperText={errors.phoneNumber && element}
+        error={!!errors.phoneNumber && fieldErrors.phoneNumber}
+        helperText={
+          fieldErrors.phoneNumber && errors.phoneNumber ? element : null
+        }
         style={{ width: "70%" }}
+        onBlur={handleBlur("phoneNumber")}
         required
       />
       <Button
-        type="submit"
         variant="contained"
         style={{
           width: "15%",
@@ -175,6 +215,7 @@ const Form: React.FC = () => {
           left: "565px",
           backgroundColor: "#6B40E3",
         }}
+        onClick={handleButtonClick}
       >
         შემდეგი
       </Button>
