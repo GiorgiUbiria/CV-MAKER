@@ -15,3 +15,7 @@ body {
   font-family: "HelveticaNeue", sans-serif;
   min-height: 100vh;
 }
+
+#root {
+  width: 100%;
+}
