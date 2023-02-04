@@ -93,7 +93,7 @@ const MyForm = () => (
     }}
   >
     {({ isSubmitting }) => (
-      <Form>
+      <Form style={{ display: "flex", flexDirection: "column" }}>
         <Field as={TextField} type="text" name="name" placeholder="Name" />
         <ErrorMessage name="name" component="div" />
         <Field

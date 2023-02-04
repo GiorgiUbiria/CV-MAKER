@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
-import { Main } from "./components/Main";
-import GeneralInformation from "./components/GeneralInformation";
+import { Main } from "./pages/Main";
+import GeneralInformation from "./pages/GeneralInformation";
 
 function App() {
   return (
