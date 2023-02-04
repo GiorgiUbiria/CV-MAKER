@@ -10,7 +10,7 @@ import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 const element = <FontAwesomeIcon icon={faTriangleExclamation} />;
 
 interface FormProps extends React.HTMLAttributes<HTMLFormElement> {
-  onDataFromChild: (data: any) => void;
+  onDataFromFields: (data: any) => void;
 }
 
 interface FormValues {
@@ -83,11 +83,15 @@ const validate = (values: FormValues) => {
   return errors;
 };
 
-const Form: React.FC<FormProps> = ({ onDataFromChild }: any) => {
-  const navigate = useNavigate();
-
-  const handleButtonClick = () => {
-    navigate("/experience");
+const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
+  const initialValues = {
+    name: "",
+    surname: "",
+    image:
+      "https://png.pngtree.com/png-clipart/20191027/ourlarge/pngtree-outline-person-icon-png-image_1869918.jpg",
+    aboutMe: "",
+    email: "",
+    phoneNumber: "",
   };
 
   const [fieldErrors, setFieldErrors] = useState({
@@ -97,44 +101,50 @@ const Form: React.FC<FormProps> = ({ onDataFromChild }: any) => {
     email: false,
     phoneNumber: false,
   });
+  const [errors, setErrors] = useState({} as { [key: string]: string });
+  const [values, setValues] = useState(() => {
+    const storedValues = localStorage.getItem("form-data");
+    return storedValues ? JSON.parse(storedValues) : initialValues;
+  });
+  const [image, setImage] = useState<string>();
+
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    navigate("/experience");
+  };
 
   const handleBlur = (field: string) => () => {
     setFieldErrors({ ...fieldErrors, [field]: true });
   };
 
-  const initialValues = {
-    name: "",
-    surname: "",
-    image: "",
-    aboutMe: "",
-    email: "",
-    phoneNumber: "",
+  const handleImageChange = (e: any) => {
+    const newImage = URL.createObjectURL(e.target.files[0]);
+    setImage(newImage);
+    setValues({ ...values, image: newImage });
   };
 
-  const [values, setValues] = useState(() => {
-    const storedValues = localStorage.getItem("form-data");
-    return storedValues ? JSON.parse(storedValues) : initialValues;
-  });
-
-  useEffect(() => {
-    localStorage.setItem("form-data", JSON.stringify(values));
-  }, [values]);
-
-  const [errors, setErrors] = useState({} as { [key: string]: string });
-
-  useEffect(() => {
-    setErrors(validate(values));
-    onDataFromChild(values);
-  }, [values]);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
+    setValues({
+      ...values,
+      [e.target.name]: e.target.value,
+      image: image,
+    });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setErrors(validate(values));
   };
+
+  useEffect(() => {
+    localStorage.setItem("form-data", JSON.stringify(values));
+  }, [values]);
+
+  useEffect(() => {
+    setErrors(validate(values));
+    onDataFromFields(values);
+  }, [values]);
 
   return (
     <form
@@ -170,7 +180,7 @@ const Form: React.FC<FormProps> = ({ onDataFromChild }: any) => {
           required
         />
       </div>
-
+      <input type="file" name="image" id="img" onChange={handleImageChange} />
       <TextField
         label="ჩემს შესახებ"
         name="aboutMe"

@@ -1,15 +1,18 @@
+import { useEffect, useState } from "react";
+
 const CVDisplay = (props: any) => {
-  const { values } = props;
+  const { fieldValues } = props;
 
   return (
     <div style={{ marginLeft: "100px" }}>
       <h2>CV</h2>
       <p>
-        Name: {values?.name} {values?.surname}
+        Name: {fieldValues?.name} {fieldValues?.surname}
       </p>
-      <p>About Me: {values?.aboutMe}</p>
-      <p>Email: {values?.email}</p>
-      <p>Phone Number: {values?.phoneNumber}</p>
+      <img src={fieldValues?.image} alt="Image" />
+      <p>About Me: {fieldValues?.aboutMe}</p>
+      <p>Email: {fieldValues?.email}</p>
+      <p>Phone Number: {fieldValues?.phoneNumber}</p>
     </div>
   );
 };

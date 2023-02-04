@@ -11,13 +11,11 @@ import "./GeneralInformation.css";
 
 const element = <FontAwesomeIcon icon={faAngleLeft} />;
 
-
-
 const GeneralInformation = () => {
-  const [dataFromChild, setDataFromChild] = useState(null);
+  const [dataFromField, setDataFromField] = useState(null);
 
-  const handleDataFromChild = (data: any) => {
-    setDataFromChild(data);
+  const handleDataFromFields = (data: any) => {
+    setDataFromField(data);
   };
 
   return (
@@ -46,10 +44,10 @@ const GeneralInformation = () => {
           პირადი ინფორმაცია{" "}
         </h1>
         <hr />
-        <Form onDataFromChild={handleDataFromChild} />
+        <Form onDataFromFields={handleDataFromFields} />
       </div>
       <div className="cv">
-        <CVDisplay values={dataFromChild} />
+        <CVDisplay fieldValues={dataFromField} />
       </div>
     </div>
   );
