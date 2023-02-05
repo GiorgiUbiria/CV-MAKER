@@ -128,7 +128,6 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
     setValues({
       ...values,
       [e.target.name]: e.target.value,
-      image: image,
     });
   };
 
@@ -153,7 +152,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
         display: "flex",
         flexDirection: "column",
         gap: "3rem",
-        marginLeft: "100px",
+        marginLeft: "250px",
       }}
     >
       <div className="name_fields" style={{ display: "flex", gap: "5rem" }}>
@@ -220,10 +219,9 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
         variant="contained"
         style={{
           width: "15%",
-          position: "relative",
-          top: "100px",
-          left: "565px",
           backgroundColor: "#6B40E3",
+          marginBottom: "20px",
+          marginLeft: "480px",
         }}
         onClick={handleButtonClick}
       >

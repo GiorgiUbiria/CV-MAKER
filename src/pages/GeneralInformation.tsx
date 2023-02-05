@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import Form from "../components/Form";
+import Form from "../components/GeneralForm";
 import CVDisplay from "../components/CVDisplay";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -26,8 +26,8 @@ const GeneralInformation = () => {
           fontSize: "28px",
           color: "#1a1a1a",
           position: "absolute",
-          left: "15px",
-          top: "40px",
+          left: "135px",
+          top: "50px",
         }}
       >
         {element}
@@ -35,7 +35,7 @@ const GeneralInformation = () => {
       <div className="form">
         <h1
           style={{
-            marginLeft: "100px",
+            marginLeft: "250px",
             marginTop: "30px",
             fontSize: "48px",
           }}
@@ -43,7 +43,7 @@ const GeneralInformation = () => {
           {" "}
           პირადი ინფორმაცია{" "}
         </h1>
-        <hr />
+        <hr className="general_hr" />
         <Form onDataFromFields={handleDataFromFields} />
       </div>
       <div className="cv">

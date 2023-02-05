@@ -15,7 +15,7 @@ export const Main = () => {
         alt="reberry_logo"
         className="redberry_logo"
       />
-      <hr />
+      <hr className="main_hr" />
       <div className="button_container">
         <button
           className="add_resume_btn"
