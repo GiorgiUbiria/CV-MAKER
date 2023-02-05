@@ -13,6 +13,7 @@ import "./App.css";
 function App() {
   const [handleData, setHandleData] = useState();
   const [handleExperienceData, setHandleExperienceData] = useState();
+  const [handleEducationData, setHandleEducationData] = useState();
 
   const location = useLocation();
 
@@ -22,6 +23,10 @@ function App() {
 
   const handleDataFromExperience = (data: any) => {
     setHandleExperienceData(data);
+  };
+
+  const handleDataFromEducation = (data: any) => {
+    setHandleEducationData(data);
   };
 
   return (
@@ -39,7 +44,12 @@ function App() {
               <Experience handleExperienceData={handleDataFromExperience} />
             }
           />
-          <Route path="/education" element={<Education />} />
+          <Route
+            path="/education"
+            element={
+              <Education handleEducationData={handleDataFromEducation} />
+            }
+          />
         </Routes>
       </div>
       {location.pathname !== "/" && (
@@ -47,6 +57,7 @@ function App() {
           <CVDisplay
             fieldValues={handleData}
             experienceData={handleExperienceData}
+            educationData={handleEducationData}
           />
         </div>
       )}

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import FormTemplate from "./FormTemplate";
+import EducationTemplate from "./EducationTemplate";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 
@@ -8,37 +8,39 @@ interface FormProps extends React.HTMLAttributes<HTMLFormElement> {
 }
 
 const initialValues = {
-  position: "",
-  workName: "",
-  startDate: "",
-  endDate: "",
+  institute: "",
+  degree: "",
+  due_date: "",
   description: "",
 };
 
 const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
-  const [forms, setForms] = useState(() => {
-    const experienceData = localStorage.getItem("forms");
-    return experienceData
-      ? JSON.parse(experienceData)
+  const [education, setEducation] = useState(() => {
+    const educationData = localStorage.getItem("education");
+    return educationData
+      ? JSON.parse(educationData)
       : [{ id: 0, values: initialValues }];
   });
 
   const addForm = () => {
-    setForms([...forms, { id: forms.length, values: initialValues }]);
+    setEducation([
+      ...education,
+      { id: education.length, values: initialValues },
+    ]);
   };
 
   const navigate = useNavigate();
 
   const handleForwardButtonClick = () => {
-    navigate("/education");
+    navigate("/cvs");
   };
 
   const handleBackButtonClick = () => {
-    navigate("/general_information");
+    navigate("/experience");
   };
 
   const handleChange = (event: any, formId: number) => {
-    const newForms = forms.map((form: any) => {
+    const newForms = education.map((form: any) => {
       if (form.id === formId) {
         return {
           ...form,
@@ -50,23 +52,23 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
       }
       return form;
     });
-    setForms(newForms);
-    onDataFromFields(forms);
+    setEducation(newForms);
+    onDataFromFields(education);
   };
 
   useEffect(() => {
-    localStorage.setItem("forms", JSON.stringify(forms));
-    onDataFromFields(forms);
-  }, [forms]);
+    localStorage.setItem("education", JSON.stringify(education));
+    onDataFromFields(education);
+  }, [education]);
 
   return (
     <div
       className="experience_form"
       style={{ display: "flex", flexDirection: "column" }}
     >
-      {forms.map((form: any) => (
+      {education.map((form: any) => (
         <>
-          <FormTemplate
+          <EducationTemplate
             key={form.id}
             id={form.id}
             onChange={(event: any) => handleChange(event, form.id)}
