@@ -1,0 +1,14 @@
+.cv {
+  width: 40%;
+}
+
+.app {
+  display: flex;
+  width: 100%;
+  min-height: 100%;
+}
+
+.routes {
+  width: 60%;
+}
+

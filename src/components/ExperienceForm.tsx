@@ -39,7 +39,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
   };
 
   const handleChange = (event: any, formId: number) => {
-    const newForms = forms.map((form) => {
+    const newForms = forms.map((form: any) => {
       if (form.id === formId) {
         return {
           ...form,
@@ -65,7 +65,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
       className="experience_form"
       style={{ display: "flex", flexDirection: "column" }}
     >
-      {forms.map((form) => (
+      {forms.map((form: any) => (
         <>
           <FormTemplate
             key={form.id}

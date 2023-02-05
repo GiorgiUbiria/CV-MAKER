@@ -20,13 +20,9 @@ body {
 
 .form {
   background: #f9f9f9;
-  width: 60%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 6rem;
   min-height: 100vh;
-}
-
-.cv {
-  width: 40%;
 }

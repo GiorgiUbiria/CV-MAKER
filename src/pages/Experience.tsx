@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import Form from "../components/ExperienceForm";
@@ -11,12 +11,16 @@ import "./GeneralInformation.css";
 
 const element = <FontAwesomeIcon icon={faAngleLeft} />;
 
-const Experience = () => {
+const Experience = ({ handleExperienceData }: any) => {
   const [experienceData, setExperienceData] = useState(null);
 
   const handleDataFromFields = (data: any) => {
     setExperienceData(data);
   };
+
+  useEffect(() => {
+    handleExperienceData(experienceData);
+  }, [experienceData]);
 
   return (
     <div className="container">
@@ -45,9 +49,6 @@ const Experience = () => {
         </h1>
         <hr className="general_hr" />
         <Form onDataFromFields={handleDataFromFields} />
-      </div>
-      <div className="cv">
-        <CVDisplay experienceData={experienceData} />
       </div>
     </div>
   );

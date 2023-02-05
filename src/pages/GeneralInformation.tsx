@@ -1,22 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import Form from "../components/GeneralForm";
-import CVDisplay from "../components/CVDisplay";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 
-import "./GeneralInformation.css";
-
 const element = <FontAwesomeIcon icon={faAngleLeft} />;
 
-const GeneralInformation = () => {
+const GeneralInformation = ({ handleData }: any) => {
   const [dataFromField, setDataFromField] = useState(null);
 
   const handleDataFromFields = (data: any) => {
     setDataFromField(data);
   };
+
+  useEffect(() => {
+    handleData(dataFromField);
+  }, [dataFromField]);
 
   return (
     <div className="container">
@@ -45,9 +46,6 @@ const GeneralInformation = () => {
         </h1>
         <hr className="general_hr" />
         <Form onDataFromFields={handleDataFromFields} />
-      </div>
-      <div className="cv">
-        <CVDisplay fieldValues={dataFromField} />
       </div>
     </div>
   );
