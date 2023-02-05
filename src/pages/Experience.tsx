@@ -12,10 +12,10 @@ import "./GeneralInformation.css";
 const element = <FontAwesomeIcon icon={faAngleLeft} />;
 
 const Experience = () => {
-  const [dataFromField, setDataFromField] = useState(null);
+  const [experienceData, setExperienceData] = useState(null);
 
   const handleDataFromFields = (data: any) => {
-    setDataFromField(data);
+    setExperienceData(data);
   };
 
   return (
@@ -41,13 +41,13 @@ const Experience = () => {
           }}
         >
           {" "}
-          პირადი ინფორმაცია{" "}
+          გამოცდილება{" "}
         </h1>
         <hr className="general_hr" />
         <Form onDataFromFields={handleDataFromFields} />
       </div>
       <div className="cv">
-        <CVDisplay fieldValues={dataFromField} />
+        <CVDisplay experienceData={experienceData} />
       </div>
     </div>
   );

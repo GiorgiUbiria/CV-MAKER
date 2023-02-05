@@ -6,7 +6,7 @@ const element = <FontAwesomeIcon icon={faAt} />;
 const element2 = <FontAwesomeIcon icon={faPhone} />;
 
 const CVDisplay = (props: any) => {
-  const { fieldValues } = props;
+  const { fieldValues, experienceData } = props;
 
   return (
     <>
@@ -85,13 +85,24 @@ const CVDisplay = (props: any) => {
         }}
       >
         <h2 style={{ color: "#F93B1D" }}> გამოცდილება </h2>
-        <h5 style={{ marginTop: "10px" }}> {fieldValues?.position} </h5>
-        <h5 style={{ marginTop: "10px" }}> {fieldValues?.workName} </h5>
-        <p>
-          {" "}
-          {fieldValues?.startDate} - {fieldValues?.endDate}
-        </p>
-        <p>{fieldValues?.description}</p>
+        {experienceData?.map((data: any) => (
+          <>
+            <h5 style={{ marginTop: "10px" }} key={data.id + "_position"}>
+              {" "}
+              {data?.values?.position}{" "}
+            </h5>
+            <h5 style={{ marginTop: "10px" }} key={data.id + "_workName"}>
+              {" "}
+              {data?.values?.workName}{" "}
+            </h5>
+            <p key={data.id + "_startDate"}>
+              {" "}
+              {data?.values?.startDate} - {data?.values?.endDate}
+            </p>
+            <p key={data.id + "_description"}>{data?.values?.description}</p>
+            <br />
+          </>
+        ))}
       </div>
     </>
   );

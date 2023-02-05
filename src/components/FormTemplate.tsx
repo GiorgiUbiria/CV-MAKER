@@ -1,25 +1,12 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import TextField from "@mui/material/TextField";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
-
 const element = <FontAwesomeIcon icon={faTriangleExclamation} />;
 
-interface FormProps extends React.HTMLAttributes<HTMLFormElement> {
-  onDataFromFields: (data: any) => void;
-}
-
-interface FormValues {
-  position: string;
-  workName: string;
-  startDate: string;
-  endDate: string;
-  description: string;
-}
-
-const validate = (values: FormValues) => {
+const validate = (values: any) => {
   const errors: { [key: string]: string } = {};
 
   if (!values.position) {
@@ -46,12 +33,10 @@ const validate = (values: FormValues) => {
     delete errors.workName;
   }
 
-  if (values.startDate) {
-    if (typeof values.startDate !== "string") {
-      errors.startDate = "About Me must be a string";
-    } else {
-      delete errors.startDate;
-    }
+  if (!values.startDate) {
+    errors.startDate = "StartDate is required";
+  } else {
+    delete errors.startDate;
   }
 
   if (!values.endDate) {
@@ -71,17 +56,7 @@ const validate = (values: FormValues) => {
   return errors;
 };
 
-const ExperienceFormFields: React.FC<FormProps> = ({
-  onDataFromFields,
-}: any) => {
-  const initialValues = {
-    position: "",
-    workName: "",
-    startDate: "",
-    endDate: "",
-    description: "",
-  };
-
+const FormTemplate = ({ id, onChange, values }: any) => {
   const [fieldErrors, setFieldErrors] = useState({
     position: false,
     workName: false,
@@ -92,33 +67,8 @@ const ExperienceFormFields: React.FC<FormProps> = ({
 
   const [errors, setErrors] = useState({} as { [key: string]: string });
 
-  const [values, setValues] = useState(() => {
-    const storedValues = localStorage.getItem("form-data");
-    return storedValues ? JSON.parse(storedValues) : initialValues;
-  });
-
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-
   const handleBlur = (field: string) => () => {
     setFieldErrors({ ...fieldErrors, [field]: true });
-  };
-
-  const handleDatechange = (e: any) => {
-    if (e.target.name === "startDate") {
-      setStartDate(e.target.value);
-      setValues({ ...values, startDate: startDate });
-    } else {
-      setEndDate(e.target.value);
-      setValues({ ...values, endDate: endDate });
-    }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValues({
-      ...values,
-      [e.target.name]: e.target.value,
-    });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -127,13 +77,9 @@ const ExperienceFormFields: React.FC<FormProps> = ({
   };
 
   useEffect(() => {
-    localStorage.setItem("form-data", JSON.stringify(values));
+    setErrors(validate(values));
   }, [values]);
 
-  useEffect(() => {
-    setErrors(validate(values));
-    onDataFromFields(values);
-  }, [values]);
   return (
     <form
       onSubmit={handleSubmit}
@@ -142,13 +88,14 @@ const ExperienceFormFields: React.FC<FormProps> = ({
         flexDirection: "column",
         gap: "3rem",
         marginLeft: "250px",
+        marginTop: "15px",
       }}
     >
       <TextField
         label="თანამდებობა"
-        name="position"
+        name={`position-${id}`}
         value={values.position}
-        onChange={handleChange}
+        onChange={onChange}
         error={!!errors.position && fieldErrors.position}
         helperText={fieldErrors.position && errors.position ? element : null}
         onBlur={handleBlur("position")}
@@ -157,9 +104,9 @@ const ExperienceFormFields: React.FC<FormProps> = ({
       />
       <TextField
         label="დამსაქმებელი"
-        name="workName"
+        name={`workName-${id}`}
         value={values.workName}
-        onChange={handleChange}
+        onChange={onChange}
         error={!!errors.workName && fieldErrors.workName}
         helperText={fieldErrors.workName && errors.workName ? element : null}
         style={{ width: "70%" }}
@@ -170,26 +117,26 @@ const ExperienceFormFields: React.FC<FormProps> = ({
       <div className="date_inputs" style={{ display: "flex", gap: "90px" }}>
         <input
           type="date"
-          name="startDate"
+          name={`startDate-${id}`}
           id="startDate"
-          onChange={handleDatechange}
+          onChange={onChange}
           style={{ width: "30%" }}
           title="Start Date"
         />
         <input
           type="date"
-          name="endDate"
+          name={`endDate-${id}`}
           id="endDate"
-          onChange={handleDatechange}
+          onChange={onChange}
           style={{ width: "30%" }}
         />
       </div>
 
       <TextField
         label="აღწერა"
-        name="description"
+        name={`description-${id}`}
         value={values.description}
-        onChange={handleChange}
+        onChange={onChange}
         error={!!errors.description && fieldErrors.description}
         helperText={
           fieldErrors.description && errors.description ? element : null
@@ -203,4 +150,4 @@ const ExperienceFormFields: React.FC<FormProps> = ({
   );
 };
 
-export default ExperienceFormFields;
+export default FormTemplate;

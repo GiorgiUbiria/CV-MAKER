@@ -1,13 +1,33 @@
 import { useNavigate } from "react-router-dom";
-import ExperienceFormFields from "./ExperienceFormFields";
-
+import FormTemplate from "./FormTemplate";
 import Button from "@mui/material/Button";
+import { useEffect, useState } from "react";
+import React from "react";
 
 interface FormProps extends React.HTMLAttributes<HTMLFormElement> {
   onDataFromFields: (data: any) => void;
 }
 
+const initialValues = {
+  position: "",
+  workName: "",
+  startDate: "",
+  endDate: "",
+  description: "",
+};
+
 const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
+  const [forms, setForms] = useState(() => {
+    const experienceData = localStorage.getItem("forms");
+    return experienceData
+      ? JSON.parse(experienceData)
+      : [{ id: 0, values: initialValues }];
+  });
+
+  const addForm = () => {
+    setForms([...forms, { id: forms.length, values: initialValues }]);
+  };
+
   const navigate = useNavigate();
 
   const handleForwardButtonClick = () => {
@@ -18,12 +38,45 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
     navigate("/general_information");
   };
 
+  const handleChange = (event: any, formId: number) => {
+    const newForms = forms.map((form) => {
+      if (form.id === formId) {
+        return {
+          ...form,
+          values: {
+            ...form.values,
+            [event.target.name.split("-")[0]]: event.target.value,
+          },
+        };
+      }
+      return form;
+    });
+    setForms(newForms);
+    onDataFromFields(forms);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("forms", JSON.stringify(forms));
+    onDataFromFields(forms);
+  }, [forms]);
+
   return (
     <div
       className="experience_form"
       style={{ display: "flex", flexDirection: "column" }}
     >
-      <ExperienceFormFields onDataFromFields={onDataFromFields} />
+      {forms.map((form) => (
+        <>
+          <FormTemplate
+            key={form.id}
+            id={form.id}
+            onChange={(event: any) => handleChange(event, form.id)}
+            values={form.values}
+          />
+          <hr style={{ marginTop: "15px" }} />
+        </>
+      ))}
+
       <div
         className="buttons"
         style={{ display: "flex", flexDirection: "column" }}
@@ -34,6 +87,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
             marginLeft: "240px",
             marginTop: "30px",
           }}
+          onClick={addForm}
         >
           გამოცდილების დამატება
         </Button>
