@@ -35,14 +35,14 @@ const validate = (values: any) => {
   }
 
   if (!values.due_date) {
-    errors.due_date = "EndDate is required";
+    errors.due_date = "due_date is required";
   } else {
     delete errors.due_date;
   }
 
   if (!values.description) {
     errors.description = "Description is required";
-  } else if (!/^[\u10D0-\u10FF]+$/.test(values.workName)) {
+  } else if (!/^[\u10D0-\u10FF]+$/.test(values.description)) {
     errors.description = "Description must contain only Georgian letters";
   } else {
     delete errors.description;

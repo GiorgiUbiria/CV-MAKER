@@ -53,35 +53,55 @@ const CVDisplay = (props: any) => {
             {" "}
             {generalInfo?.name} {generalInfo?.surname}{" "}
           </h1>
-          <p style={{ marginTop: "30px", color: "#7E7E7E", fontSize: "20px" }}>
-            <span style={{ marginRight: "10px" }}>{element2}</span>
-            {generalInfo?.phoneNumber}
-          </p>
-          <p style={{ color: "#7E7E7E", fontSize: "20px" }}>
-            <span style={{ marginRight: "10px" }}>{element}</span>{" "}
-            {generalInfo?.email}
-          </p>
+          {generalInfo?.phone_number && (
+            <>
+              <p
+                style={{
+                  marginTop: "30px",
+                  color: "#7E7E7E",
+                  fontSize: "20px",
+                }}
+              >
+                <span style={{ marginRight: "10px" }}>{element2}</span>
+                {generalInfo?.phone_number}
+              </p>
+            </>
+          )}
+          {generalInfo?.email && (
+            <>
+              <p style={{ color: "#7E7E7E", fontSize: "20px" }}>
+                <span style={{ marginRight: "10px" }}>{element}</span>{" "}
+                {generalInfo?.email}
+              </p>
+            </>
+          )}
           <div
-            className="aboutMe"
+            className="about_me"
             style={{
               display: "flex",
               flexDirection: "column",
             }}
           >
-            <h4 style={{ color: "#F93B1D", marginTop: "30px" }}>ჩემ შესახებ</h4>
-            <p
-              style={{
-                marginTop: "10px",
-                width: "400px",
-                fontSize: "17px",
-                fontWeight: "500",
-                wordWrap: "break-word",
-                display: "block",
-              }}
-            >
-              {" "}
-              {generalInfo?.aboutMe}
-            </p>
+            {generalInfo?.about_me && (
+              <>
+                <h4 style={{ color: "#F93B1D", marginTop: "30px" }}>
+                  ჩემ შესახებ
+                </h4>
+                <p
+                  style={{
+                    marginTop: "10px",
+                    width: "400px",
+                    fontSize: "17px",
+                    fontWeight: "500",
+                    wordWrap: "break-word",
+                    display: "block",
+                  }}
+                >
+                  {" "}
+                  {generalInfo?.about_me}
+                </p>
+              </>
+            )}
             <hr
               style={{
                 width: "90%",
@@ -121,13 +141,13 @@ const CVDisplay = (props: any) => {
               {" "}
               {data?.values?.position}{" "}
             </h5>
-            <h5 style={{ marginTop: "10px" }} key={data.id + "_workName"}>
+            <h5 style={{ marginTop: "10px" }} key={data.id + "_employer"}>
               {" "}
-              {data?.values?.workName}{" "}
+              {data?.values?.employer}{" "}
             </h5>
-            <p key={data.id + "_startDate"}>
+            <p key={data.id + "_start_date"}>
               {" "}
-              {data?.values?.startDate} - {data?.values?.endDate}
+              {data?.values?.start_date} - {data?.values?.due_date}
             </p>
             <p key={data.id + "_description"}>{data?.values?.description}</p>
             <br />

@@ -9,9 +9,9 @@ interface FormProps extends React.HTMLAttributes<HTMLFormElement> {
 
 const initialValues = {
   position: "",
-  workName: "",
-  startDate: "",
-  endDate: "",
+  employer: "",
+  start_date: "",
+  due_date: "",
   description: "",
 };
 

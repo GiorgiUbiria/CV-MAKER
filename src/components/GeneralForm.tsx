@@ -17,9 +17,9 @@ interface FormValues {
   name: string;
   surname: string;
   image: string;
-  aboutMe?: string;
+  about_me?: string;
   email: string;
-  phoneNumber: string;
+  phone_number: string;
 }
 
 const validate = (values: FormValues) => {
@@ -55,11 +55,11 @@ const validate = (values: FormValues) => {
     delete errors.image;
   }
 
-  if (values.aboutMe) {
-    if (typeof values.aboutMe !== "string") {
-      errors.aboutMe = "About Me must be a string";
+  if (values.about_me) {
+    if (typeof values.about_me !== "string") {
+      errors.about_me = "About Me must be a string";
     } else {
-      delete errors.aboutMe;
+      delete errors.about_me;
     }
   }
 
@@ -71,13 +71,13 @@ const validate = (values: FormValues) => {
     delete errors.email;
   }
 
-  if (!values.phoneNumber) {
-    errors.phoneNumber = "Phone Number is required";
-  } else if (!/^\+995\d{9}$/.test(values.phoneNumber)) {
-    errors.phoneNumber =
+  if (!values.phone_number) {
+    errors.phone_number = "Phone Number is required";
+  } else if (!/^\+995\d{9}$/.test(values.phone_number)) {
+    errors.phone_number =
       "Invalid Georgian phone number format. Expected format: +995xxxxxxxxx";
   } else {
-    delete errors.phoneNumber;
+    delete errors.phone_number;
   }
 
   return errors;
@@ -89,17 +89,17 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
     surname: "",
     image:
       "https://png.pngtree.com/png-clipart/20191027/ourlarge/pngtree-outline-person-icon-png-image_1869918.jpg",
-    aboutMe: "",
+    about_me: "",
     email: "",
-    phoneNumber: "",
+    phone_number: "",
   };
 
   const [fieldErrors, setFieldErrors] = useState({
     name: false,
     surname: false,
-    aboutMe: false,
+    about_me: false,
     email: false,
-    phoneNumber: false,
+    phone_number: false,
   });
   const [errors, setErrors] = useState({} as { [key: string]: string });
   const [values, setValues] = useState(() => {
@@ -182,13 +182,13 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
       <input type="file" name="image" id="img" onChange={handleImageChange} />
       <TextField
         label="ჩემს შესახებ"
-        name="aboutMe"
-        value={values.aboutMe}
+        name="about_me"
+        value={values.about_me}
         onChange={handleChange}
-        error={!!errors.aboutMe && fieldErrors.aboutMe}
-        helperText={fieldErrors.aboutMe && errors.aboutMe ? element : null}
+        error={!!errors.about_me && fieldErrors.about_me}
+        helperText={fieldErrors.about_me && errors.about_me ? element : null}
         style={{ width: "70%" }}
-        onBlur={handleBlur("aboutMe")}
+        onBlur={handleBlur("about_me")}
         multiline
       />
       <TextField
@@ -204,15 +204,15 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
       />
       <TextField
         label="ტელეფონის ნომერი"
-        name="phoneNumber"
-        value={values.phoneNumber}
+        name="phone_number"
+        value={values.phone_number}
         onChange={handleChange}
-        error={!!errors.phoneNumber && fieldErrors.phoneNumber}
+        error={!!errors.phone_number && fieldErrors.phone_number}
         helperText={
-          fieldErrors.phoneNumber && errors.phoneNumber ? element : null
+          fieldErrors.phone_number && errors.phone_number ? element : null
         }
         style={{ width: "70%" }}
-        onBlur={handleBlur("phoneNumber")}
+        onBlur={handleBlur("phone_number")}
         required
       />
       <Button

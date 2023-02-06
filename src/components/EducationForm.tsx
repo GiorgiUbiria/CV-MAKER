@@ -31,12 +31,24 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
 
   const navigate = useNavigate();
 
-  const handleForwardButtonClick = () => {
+  const handleForwardButtonClick = async () => {
+    const generalInfo = JSON.parse(localStorage.getItem("form-data") as string);
+    const experienceInfo = JSON.parse(localStorage.getItem("forms") as string);
+    const educationInfo = JSON.parse(
+      localStorage.getItem("education") as string
+    );
+    const finalResult = {
+      ...generalInfo,
+      experiences: experienceInfo.map((obj: any) => obj.values),
+      educations: educationInfo.map((obj: any) => obj.values),
+    };
+
+    console.log(JSON.stringify(finalResult));
+
     navigate("/cvs");
   };
 
   const handleBackButtonClick = () => {
-    
     navigate("/experience");
   };
 

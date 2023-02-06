@@ -21,34 +21,34 @@ const validate = (values: any) => {
     delete errors.position;
   }
 
-  if (!values.workName) {
-    errors.workName = "WorkName is required";
-  } else if (typeof values.workName !== "string") {
-    errors.workName = "WorkName must be a string";
-  } else if (values.workName.length < 2) {
-    errors.workName = "WorkName must be at least 2 characters long";
-  } else if (!/^[\u10D0-\u10FF]+$/.test(values.workName)) {
-    errors.workName = "WorkName must contain only Georgian letters";
+  if (!values.employer) {
+    errors.employer = "employer is required";
+  } else if (typeof values.employer !== "string") {
+    errors.employer = "employer must be a string";
+  } else if (values.employer.length < 2) {
+    errors.employer = "employer must be at least 2 characters long";
+  } else if (!/^[\u10D0-\u10FF]+$/.test(values.employer)) {
+    errors.employer = "employer must contain only Georgian letters";
   } else {
-    delete errors.workName;
+    delete errors.employer;
   }
 
-  if (!values.startDate) {
-    errors.startDate = "StartDate is required";
+  if (!values.start_date) {
+    errors.start_date = "start_date is required";
   } else {
-    delete errors.startDate;
+    delete errors.start_date;
   }
 
-  if (!values.endDate) {
-    errors.endDate = "EndDate is required";
+  if (!values.due_date) {
+    errors.due_date = "due_date is required";
   } else {
-    delete errors.endDate;
+    delete errors.due_date;
   }
 
   if (!values.description) {
     errors.description = "Description is required";
-  } else if (!/^[\u10D0-\u10FF]+$/.test(values.workName)) {
-    errors.workName = "Description must contain only Georgian letters";
+  } else if (!/^[\u10D0-\u10FF]+$/.test(values.employer)) {
+    errors.description = "Description must contain only Georgian letters";
   } else {
     delete errors.description;
   }
@@ -59,9 +59,9 @@ const validate = (values: any) => {
 const FormTemplate = ({ id, onChange, values }: any) => {
   const [fieldErrors, setFieldErrors] = useState({
     position: false,
-    workName: false,
-    startDate: false,
-    endDate: false,
+    employer: false,
+    start_date: false,
+    due_date: false,
     description: false,
   });
 
@@ -104,29 +104,29 @@ const FormTemplate = ({ id, onChange, values }: any) => {
       />
       <TextField
         label="დამსაქმებელი"
-        name={`workName-${id}`}
-        value={values.workName}
+        name={`employer-${id}`}
+        value={values.employer}
         onChange={onChange}
-        error={!!errors.workName && fieldErrors.workName}
-        helperText={fieldErrors.workName && errors.workName ? element : null}
+        error={!!errors.employer && fieldErrors.employer}
+        helperText={fieldErrors.employer && errors.employer ? element : null}
         style={{ width: "70%" }}
-        onBlur={handleBlur("workName")}
+        onBlur={handleBlur("employer")}
         required
       />
 
       <div className="date_inputs" style={{ display: "flex", gap: "90px" }}>
         <input
           type="date"
-          name={`startDate-${id}`}
-          id="startDate"
+          name={`start_date-${id}`}
+          id="start_date"
           onChange={onChange}
           style={{ width: "30%" }}
           title="Start Date"
         />
         <input
           type="date"
-          name={`endDate-${id}`}
-          id="endDate"
+          name={`due_date-${id}`}
+          id="due_date"
           onChange={onChange}
           style={{ width: "30%" }}
         />
