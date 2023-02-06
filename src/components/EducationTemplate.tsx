@@ -111,30 +111,35 @@ const EducationTemplate = ({ id, onChange, values }: any) => {
         required
       />
 
-      <FormControl>
-        <InputLabel id="demo-simple-select-label">ხარისხი</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={selectedOption}
-          label="Age"
-          onChange={handleOptionChange}
-        >
-          {options.map((option: any) => (
-            <MenuItem key={option.id} value={option.title}>
-              {option.title}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <div
+        className="fields_container"
+        style={{ display: "flex", justifyContent: "space-between" }}
+      >
+        <FormControl style={{ width: "30%" }}>
+          <InputLabel id="demo-simple-select-label">ხარისხი</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={selectedOption}
+            label="Age"
+            onChange={handleOptionChange}
+          >
+            {options.map((option: any) => (
+              <MenuItem key={option.id} value={option.title}>
+                {option.title}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
 
-      <input
-        type="date"
-        name={`due_date-${id}`}
-        id="due_date"
-        onChange={onChange}
-        style={{ width: "30%" }}
-      />
+        <input
+          type="date"
+          name={`due_date-${id}`}
+          id="due_date"
+          onChange={onChange}
+          style={{ width: "30%", marginRight: "260px" }}
+        />
+      </div>
 
       <TextField
         label="აღწერა"

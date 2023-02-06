@@ -36,6 +36,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
   };
 
   const handleBackButtonClick = () => {
+    
     navigate("/experience");
   };
 
@@ -90,7 +91,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
           }}
           onClick={addForm}
         >
-          გამოცდილების დამატება
+          განათლების დამატება
         </Button>
         <div
           className="navigation_buttons"
@@ -122,7 +123,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
             }}
             onClick={handleForwardButtonClick}
           >
-            შემდეგი
+            დასრულება
           </Button>
         </div>
       </div>

@@ -5,6 +5,7 @@ import { Main } from "./pages/Main";
 import GeneralInformation from "./pages/GeneralInformation";
 import Experience from "./pages/Experience";
 import Education from "./pages/Education";
+import Resume from "./pages/Resume";
 
 import CVDisplay from "./components/CVDisplay";
 
@@ -50,9 +51,19 @@ function App() {
               <Education handleEducationData={handleDataFromEducation} />
             }
           />
+          <Route
+            path="/cvs"
+            element={
+              <Resume
+                fieldValues={handleData}
+                experienceData={handleExperienceData}
+                educationData={handleEducationData}
+              />
+            }
+          />
         </Routes>
       </div>
-      {location.pathname !== "/" && (
+      {location.pathname !== "/" && location.pathname !== "/cvs" && (
         <div className="cv">
           <CVDisplay
             fieldValues={handleData}

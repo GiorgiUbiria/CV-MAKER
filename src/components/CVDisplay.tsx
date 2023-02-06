@@ -1,12 +1,42 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAt } from "@fortawesome/free-solid-svg-icons";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react";
 
 const element = <FontAwesomeIcon icon={faAt} />;
 const element2 = <FontAwesomeIcon icon={faPhone} />;
 
 const CVDisplay = (props: any) => {
-  const { fieldValues, experienceData } = props;
+  const { fieldValues, experienceData, educationData } = props;
+
+  const [generalInfo, setGeneralInfo] = useState(() => {
+    const generalData = localStorage.getItem("form-data");
+    return generalData ? JSON.parse(generalData) : fieldValues;
+  });
+
+  const [experienceFormData, setExperienceFormData] = useState(() => {
+    const experience = localStorage.getItem("forms");
+    return experience ? JSON.parse(experience) : experienceData;
+  });
+
+  const [educationFormData, setEducationFormData] = useState(() => {
+    const education = localStorage.getItem("education");
+    return education ? JSON.parse(education) : educationData;
+  });
+
+  useEffect(() => {
+    setGeneralInfo(JSON.parse(localStorage.getItem("form-data") as string));
+  }, [fieldValues]);
+
+  useEffect(() => {
+    setExperienceFormData(JSON.parse(localStorage.getItem("forms") as string));
+  }, [experienceData]);
+
+  useEffect(() => {
+    setEducationFormData(
+      JSON.parse(localStorage.getItem("education") as string)
+    );
+  }, [educationData]);
 
   return (
     <>
@@ -21,15 +51,15 @@ const CVDisplay = (props: any) => {
         >
           <h1 style={{ color: "#F93B1D" }}>
             {" "}
-            {fieldValues?.name} {fieldValues?.surname}{" "}
+            {generalInfo?.name} {generalInfo?.surname}{" "}
           </h1>
           <p style={{ marginTop: "30px", color: "#7E7E7E", fontSize: "20px" }}>
             <span style={{ marginRight: "10px" }}>{element2}</span>
-            {fieldValues?.phoneNumber}
+            {generalInfo?.phoneNumber}
           </p>
           <p style={{ color: "#7E7E7E", fontSize: "20px" }}>
             <span style={{ marginRight: "10px" }}>{element}</span>{" "}
-            {fieldValues?.email}
+            {generalInfo?.email}
           </p>
           <div
             className="aboutMe"
@@ -50,7 +80,7 @@ const CVDisplay = (props: any) => {
               }}
             >
               {" "}
-              {fieldValues?.aboutMe}
+              {generalInfo?.aboutMe}
             </p>
             <hr
               style={{
@@ -61,7 +91,7 @@ const CVDisplay = (props: any) => {
           </div>
         </div>
         <img
-          src={fieldValues?.image}
+          src={generalInfo?.image}
           alt="Image"
           style={{
             borderRadius: "50%",
@@ -85,7 +115,7 @@ const CVDisplay = (props: any) => {
         }}
       >
         <h2 style={{ color: "#F93B1D" }}> გამოცდილება </h2>
-        {experienceData?.map((data: any) => (
+        {experienceFormData?.map((data: any) => (
           <>
             <h5 style={{ marginTop: "10px" }} key={data.id + "_position"}>
               {" "}
@@ -99,6 +129,30 @@ const CVDisplay = (props: any) => {
               {" "}
               {data?.values?.startDate} - {data?.values?.endDate}
             </p>
+            <p key={data.id + "_description"}>{data?.values?.description}</p>
+            <br />
+          </>
+        ))}
+      </div>
+      <div
+        className="education"
+        style={{
+          marginLeft: "100px",
+          marginTop: "30px",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <h2 style={{ color: "#F93B1D" }}> განათლება </h2>
+        {educationFormData?.map((data: any) => (
+          <>
+            <p style={{ marginTop: "10px" }} key={data.id + "_institute"}>
+              {" "}
+              {data?.values?.institute}
+              {", "}
+              {data?.values?.degree}
+            </p>
+            <p key={data.id + "_due_date"}> {data?.values?.due_date}</p>
             <p key={data.id + "_description"}>{data?.values?.description}</p>
             <br />
           </>
