@@ -4,7 +4,14 @@ import TextField from "@mui/material/TextField";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import {
+  FormControl,
+  FormHelperText,
+  FormLabel,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
 const element = <FontAwesomeIcon icon={faTriangleExclamation} />;
 
 const validate = (values: any) => {
@@ -12,24 +19,12 @@ const validate = (values: any) => {
 
   if (!values.institute) {
     errors.institute = "Institute is required";
-  } else if (typeof values.institute !== "string") {
-    errors.institute = "Institute must be a string";
-  } else if (values.institute.length < 2) {
-    errors.institute = "Institute must be at least 2 characters long";
-  } else if (!/^[\u10D0-\u10FF]+$/.test(values.institute)) {
-    errors.institute = "Institute must contain only Georgian letters";
   } else {
     delete errors.institute;
   }
 
   if (!values.degree) {
     errors.degree = "Degree is required";
-  } else if (typeof values.degree !== "string") {
-    errors.degree = "Degree must be a string";
-  } else if (values.degree.length < 2) {
-    errors.degree = "Degree must be at least 2 characters long";
-  } else if (!/^[\u10D0-\u10FF]+$/.test(values.degree)) {
-    errors.degree = "Degree must contain only Georgian letters";
   } else {
     delete errors.degree;
   }
@@ -42,8 +37,6 @@ const validate = (values: any) => {
 
   if (!values.description) {
     errors.description = "Description is required";
-  } else if (!/^[\u10D0-\u10FF]+$/.test(values.description)) {
-    errors.description = "Description must contain only Georgian letters";
   } else {
     delete errors.description;
   }
@@ -51,7 +44,7 @@ const validate = (values: any) => {
   return errors;
 };
 
-const EducationTemplate = ({ id, onChange, values }: any) => {
+const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
   const [fieldErrors, setFieldErrors] = useState({
     institute: false,
     degree: false,
@@ -60,6 +53,12 @@ const EducationTemplate = ({ id, onChange, values }: any) => {
   });
 
   const [errors, setErrors] = useState({} as { [key: string]: string });
+
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  useEffect(() => {
+    setIsDisabled(Object.keys(errors).length !== 0);
+  }, [errors]);
 
   const handleBlur = (field: string) => () => {
     setFieldErrors({ ...fieldErrors, [field]: true });
@@ -72,6 +71,7 @@ const EducationTemplate = ({ id, onChange, values }: any) => {
 
   useEffect(() => {
     setErrors(validate(values));
+    disabled(isDisabled);
   }, [values]);
 
   const [options, setOptions] = useState([]);
@@ -99,31 +99,43 @@ const EducationTemplate = ({ id, onChange, values }: any) => {
         marginTop: "15px",
       }}
     >
-      <TextField
-        label="სასწავლებელი"
-        name={`institute-${id}`}
-        value={values.institute}
-        onChange={onChange}
-        error={!!errors.institute && fieldErrors.institute}
-        helperText={fieldErrors.institute && errors.institute ? element : null}
-        onBlur={handleBlur("institute")}
-        style={{ width: "70%" }}
-        required
-      />
+      <FormControl required>
+        <FormLabel style={{ color: "black", marginBottom: "5px" }}>
+          სასწავლებელი
+        </FormLabel>
+        <TextField
+          name={`institute-${id}`}
+          value={values.institute}
+          onChange={onChange}
+          error={!!errors.institute && fieldErrors.institute}
+          helperText={
+            fieldErrors.institute && errors.institute ? element : null
+          }
+          onBlur={handleBlur("institute")}
+          style={{ width: "70%" }}
+          placeholder="სასწავლებელი"
+        />
+        <FormHelperText style={{ marginLeft: "-2px" }}>მინიმუმ 2 სიმბოლო</FormHelperText>
+      </FormControl>
 
       <div
         className="fields_container"
         style={{ display: "flex", justifyContent: "space-between" }}
       >
-        <FormControl style={{ width: "30%" }}>
-          <InputLabel id="demo-simple-select-label">ხარისხი</InputLabel>
+        <FormControl style={{ width: "30%" }} required>
+          <FormLabel style={{ color: "black", marginBottom: "5px" }}>
+            ხარისხი
+          </FormLabel>
           <Select
-            labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={selectedOption}
+            value={values.degree ? values.degree : selectedOption}
             label="Age"
             onChange={handleOptionChange}
+            error={!!errors.degree && fieldErrors.degree}
           >
+            <MenuItem disabled value="">
+              <em>აირჩიეთ ხარისხი</em>
+            </MenuItem>
             {options.map((option: any) => (
               <MenuItem key={option.id} value={option.title}>
                 {option.title}
@@ -137,24 +149,36 @@ const EducationTemplate = ({ id, onChange, values }: any) => {
           name={`due_date-${id}`}
           id="due_date"
           onChange={onChange}
-          style={{ width: "30%", marginRight: "260px" }}
+          style={{
+            width: "30%",
+            marginRight: "260px",
+            height: "65px",
+            borderRadius: "5px",
+            border: "1px solid gray",
+            marginTop: "25px",
+            backgroundColor: "#f9f9f9",
+          }}
         />
       </div>
 
-      <TextField
-        label="აღწერა"
-        name={`description-${id}`}
-        value={values.description}
-        onChange={onChange}
-        error={!!errors.description && fieldErrors.description}
-        helperText={
-          fieldErrors.description && errors.description ? element : null
-        }
-        style={{ width: "70%" }}
-        onBlur={handleBlur("description")}
-        required
-        multiline
-      />
+      <FormControl>
+        <FormLabel style={{ color: "black", marginBottom: "5px" }}>
+          აღწერა
+        </FormLabel>
+        <TextField
+          name={`description-${id}`}
+          value={values.description}
+          onChange={onChange}
+          error={!!errors.description && fieldErrors.description}
+          helperText={
+            fieldErrors.description && errors.description ? element : null
+          }
+          style={{ width: "70%" }}
+          onBlur={handleBlur("description")}
+          multiline
+          placeholder="განათლების აღწერა"
+        />
+      </FormControl>
     </form>
   );
 };

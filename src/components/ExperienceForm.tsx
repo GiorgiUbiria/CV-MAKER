@@ -23,6 +23,8 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
       : [{ id: 0, values: initialValues }];
   });
 
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+
   const addForm = () => {
     setForms([...forms, { id: forms.length, values: initialValues }]);
   };
@@ -71,8 +73,9 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
             id={form.id}
             onChange={(event: any) => handleChange(event, form.id)}
             values={form.values}
+            disabled={setButtonDisabled}
           />
-          <hr style={{ marginTop: "15px" }} />
+          <hr style={{ marginTop: "70px" }} />
         </>
       ))}
 
@@ -87,6 +90,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
             marginTop: "30px",
           }}
           onClick={addForm}
+          variant="contained"
         >
           გამოცდილების დამატება
         </Button>
@@ -95,7 +99,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
           style={{
             display: "flex",
             justifyContent: "space-between",
-            marginTop: "50px",
+            marginTop: "100px",
           }}
         >
           <Button
@@ -119,7 +123,8 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
               marginRight: "260px",
             }}
             onClick={handleForwardButtonClick}
-          >
+            disabled={buttonDisabled}
+          > 
             შემდეგი
           </Button>
         </div>

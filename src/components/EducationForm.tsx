@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import EducationTemplate from "./EducationTemplate";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 interface FormProps extends React.HTMLAttributes<HTMLFormElement> {
   onDataFromFields: (data: any) => void;
@@ -21,6 +22,8 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
       ? JSON.parse(educationData)
       : [{ id: 0, values: initialValues }];
   });
+
+  const [buttonDisabled, setButtonDisabled] = useState(true);
 
   const addForm = () => {
     setEducation([
@@ -43,9 +46,49 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
       educations: educationInfo.map((obj: any) => obj.values),
     };
 
-    console.log(JSON.stringify(finalResult));
+    /* const test = {
+      name: "დავით",
+      surname: "ონიანი",
+      email: "davitoniani@redberry.ge",
+      phone_number: "+995598123456",
+      experiences: [
+        {
+          position: "back-end developer",
+          employer: "Redberry",
+          start_date: "2019/09/09",
+          due_date: "2020/09/23",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ornare nunc dui, a pellentesque magna blandit dapibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mattis diam nisi, at venenatis dolor aliquet vel. Pellentesque aliquet leo nec tortor pharetra, ac consectetur orci bibendum.",
+        },
+      ],
+      educations: [
+        {
+          institute: "თსუ",
+          degree: "სტუდენტი",
+          due_date: "2017/06/25",
+          description:
+            "სამართლის ფაკულტეტის მიზანი იყო მიგვეღო ფართო თეორიული ცოდნა სამართლის არსის, სისტემის, ძირითადი პრინციპების, სამართლებრივი სისტემების, ქართული სამართლის ისტორიული წყაროების, კერძო, სისხლის და საჯარო სამართლის სფეროების ძირითადი თეორიების, პრინციპებისა და რეგულირების თავისებურებების შესახებ.",
+        },
+      ],
+      image: "/storage/images/0rI7LyNRJRrokoSKUTb9EKvNuyYFKOvUmDQWoFt6.png",
+      about_me: "ეს არის აღწერა ჩემს შესახებ",
+    };
 
+    try {
+      const response = await axios.post(
+        "https://resume.redberryinternship.ge/api/cvs",
+        test,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response.data); */
     navigate("/cvs");
+    /*     } catch (error) {
+      console.log(error);
+    } */
   };
 
   const handleBackButtonClick = () => {
@@ -86,6 +129,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
             id={form.id}
             onChange={(event: any) => handleChange(event, form.id)}
             values={form.values}
+            disabled={setButtonDisabled}
           />
           <hr style={{ marginTop: "15px" }} />
         </>
@@ -102,6 +146,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
             marginTop: "30px",
           }}
           onClick={addForm}
+          variant="contained"
         >
           განათლების დამატება
         </Button>
@@ -134,6 +179,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
               marginRight: "260px",
             }}
             onClick={handleForwardButtonClick}
+            disabled={buttonDisabled}
           >
             დასრულება
           </Button>
