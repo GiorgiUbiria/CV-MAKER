@@ -1,0 +1,13 @@
+.finalForm {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cv {
+  width: 900px;
+  padding: 50px 30px 200px 30px;
+  border: 1px solid #000;
+  overflow: "hidden";
+}

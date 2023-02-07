@@ -4,7 +4,7 @@ import Resume from "../components/Resume";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 
-import "./Resume.css";
+import style from "./LastPage.module.css";
 
 const element = <FontAwesomeIcon icon={faAngleLeft} />;
 
@@ -16,7 +16,7 @@ const LastPage = (props: any) => {
   };
 
   return (
-    <div style={{}}>
+    <div className={style.finalForm}>
       <Link
         onClick={handleReset}
         to="/"
@@ -30,11 +30,13 @@ const LastPage = (props: any) => {
       >
         {element}
       </Link>
-      <Resume
-        fieldValues={fieldValues}
-        experienceData={experienceData}
-        educationData={educationData}
-      />
+      <div className={style.cv}>
+        <Resume
+          fieldValues={fieldValues}
+          experienceData={experienceData}
+          educationData={educationData}
+        />
+      </div>
     </div>
   );
 };

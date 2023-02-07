@@ -121,9 +121,13 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
   };
 
   const handleImageChange = (e: any) => {
-    const newImage = URL.createObjectURL(e.target.files[0]);
-    setImage(newImage);
-    setValues({ ...values, image: newImage });
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const dataURL = e.target?.result as string;
+      setImage(dataURL);
+      setValues({ ...values, image: dataURL });
+    };
+    reader.readAsDataURL(e.target.files[0]);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

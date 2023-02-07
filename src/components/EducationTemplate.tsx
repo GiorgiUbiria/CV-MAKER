@@ -75,11 +75,17 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
   }, [values]);
 
   const [options, setOptions] = useState([]);
+  const [date, setDate] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
 
   const handleOptionChange = (event: any) => {
     setSelectedOption(event.target.value as string);
     onChange({ target: { name: `degree-${id}`, value: event.target.value } });
+  };
+
+  const handleDateChange = (event: any) => {
+    setDate(event.target.value as string);
+    onChange({ target: { name: `due_date-${id}`, value: event.target.value } });
   };
 
   useEffect(() => {
@@ -115,7 +121,9 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
           style={{ width: "70%" }}
           placeholder="სასწავლებელი"
         />
-        <FormHelperText style={{ marginLeft: "-2px" }}>მინიმუმ 2 სიმბოლო</FormHelperText>
+        <FormHelperText style={{ marginLeft: "-2px" }}>
+          მინიმუმ 2 სიმბოლო
+        </FormHelperText>
       </FormControl>
 
       <div
@@ -148,7 +156,8 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
           type="date"
           name={`due_date-${id}`}
           id="due_date"
-          onChange={onChange}
+          onChange={handleDateChange}
+          value={date}
           style={{
             width: "30%",
             marginRight: "260px",

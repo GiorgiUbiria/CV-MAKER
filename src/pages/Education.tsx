@@ -6,7 +6,7 @@ import Form from "../components/EducationForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 
-import "./GeneralInformation.css";
+import style from "./general.module.css";
 
 const element = <FontAwesomeIcon icon={faAngleLeft} />;
 
@@ -22,7 +22,7 @@ const Education = ({ handleEducationData, page }: any) => {
   }, [educationData]);
 
   return (
-    <div className="container">
+    <div className={style.container}>
       <Link
         to="/"
         style={{
@@ -35,7 +35,7 @@ const Education = ({ handleEducationData, page }: any) => {
       >
         {element}
       </Link>
-      <div className="form">
+      <div className={style.form}>
         <h1
           style={{
             marginLeft: "250px",
@@ -57,7 +57,7 @@ const Education = ({ handleEducationData, page }: any) => {
           {" "}
           {page.current + 2}/3{" "}
         </span>
-        <hr className="general_hr" />
+        <hr className={style.general_hr} />
         <Form onDataFromFields={handleDataFromFields} />
       </div>
     </div>

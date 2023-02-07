@@ -197,6 +197,17 @@ const CVDisplay = (props: any) => {
           </div>
         </>
       )}
+      <img
+        src="/cv-logo.png"
+        alt="cv_logo"
+        style={{
+          width: "50px",
+          height: "auto",
+          position: "fixed",
+          bottom: "5px",
+          right: "650px",
+        }}
+      />
     </>
   );
 };

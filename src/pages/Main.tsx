@@ -1,5 +1,5 @@
-import "./Main.css";
 import { useNavigate } from "react-router-dom";
+import style from "./main.module.css";
 
 export const Main = () => {
   const navigate = useNavigate();
@@ -9,16 +9,16 @@ export const Main = () => {
   };
 
   return (
-    <div className="App">
+    <div className={style.App}>
       <img
         src="/redberry_logo.png"
         alt="reberry_logo"
-        className="redberry_logo"
+        className={style.redberry_logo}
       />
-      <hr className="main_hr" />
-      <div className="button_container">
+      <hr className={style.main_hr} />
+      <div className={style.button_container}>
         <button
-          className="add_resume_btn"
+          className={style.add_resume_btn}
           type="submit"
           onClick={handleButtonClick}
           style={{ cursor: "pointer" }}
@@ -29,7 +29,7 @@ export const Main = () => {
         <img
           src="/background_logo.png"
           alt="background_logo"
-          className="background_logo"
+          className={style.background_logo}
         />
       </div>
     </div>

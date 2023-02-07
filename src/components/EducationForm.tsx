@@ -35,60 +35,63 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
   const navigate = useNavigate();
 
   const handleForwardButtonClick = async () => {
+    function dataURLtoFile(dataurl: string, filename: string): File {
+      const arr = dataurl.split(",") as any;
+      const mime = arr[0].match(/:(.*?);/)[1];
+      const bstr = atob(arr[1]);
+      let n = bstr.length;
+      const u8arr = new Uint8Array(n);
+
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      return new File([u8arr], filename, { type: mime });
+    }
+
     const generalInfo = JSON.parse(localStorage.getItem("form-data") as string);
     const experienceInfo = JSON.parse(localStorage.getItem("forms") as string);
     const educationInfo = JSON.parse(
       localStorage.getItem("education") as string
     );
-    const finalResult = {
-      ...generalInfo,
-      experiences: experienceInfo.map((obj: any) => obj.values),
-      educations: educationInfo.map((obj: any) => obj.values),
-    };
 
-    /* const test = {
-      name: "დავით",
-      surname: "ონიანი",
-      email: "davitoniani@redberry.ge",
-      phone_number: "+995598123456",
-      experiences: [
-        {
-          position: "back-end developer",
-          employer: "Redberry",
-          start_date: "2019/09/09",
-          due_date: "2020/09/23",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ornare nunc dui, a pellentesque magna blandit dapibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mattis diam nisi, at venenatis dolor aliquet vel. Pellentesque aliquet leo nec tortor pharetra, ac consectetur orci bibendum.",
-        },
-      ],
-      educations: [
-        {
-          institute: "თსუ",
-          degree: "სტუდენტი",
-          due_date: "2017/06/25",
-          description:
-            "სამართლის ფაკულტეტის მიზანი იყო მიგვეღო ფართო თეორიული ცოდნა სამართლის არსის, სისტემის, ძირითადი პრინციპების, სამართლებრივი სისტემების, ქართული სამართლის ისტორიული წყაროების, კერძო, სისხლის და საჯარო სამართლის სფეროების ძირითადი თეორიების, პრინციპებისა და რეგულირების თავისებურებების შესახებ.",
-        },
-      ],
-      image: "/storage/images/0rI7LyNRJRrokoSKUTb9EKvNuyYFKOvUmDQWoFt6.png",
-      about_me: "ეს არის აღწერა ჩემს შესახებ",
-    };
+    const file = dataURLtoFile(generalInfo.image, "image.png");
+
+    const formData = new FormData();
+    formData.append("about_me", generalInfo.about_me);
+    formData.append("email", generalInfo.email);
+    formData.append("name", generalInfo.name);
+    formData.append("phone_number", generalInfo.phone_number);
+    formData.append("surname", generalInfo.surname);
+    formData.append("image", file, "image.png");
+    formData.append(
+      "experiences",
+      experienceInfo.map((obj: any) => obj.values)
+    );
+    formData.append(
+      "educations",
+      educationInfo.map((obj: any) => obj.values)
+    );
+
+    for (let pair of formData.entries()) {
+      console.log(pair[0] + ": " + pair[1]);
+    }
 
     try {
-      const response = await axios.post(
+      /*       const response = await axios.post(
         "https://resume.redberryinternship.ge/api/cvs",
-        test,
+        formData,
         {
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
           },
         }
       );
       console.log(response.data); */
-    navigate("/cvs");
-    /*     } catch (error) {
+
+      navigate("/cvs");
+    } catch (error) {
       console.log(error);
-    } */
+    }
   };
 
   const handleBackButtonClick = () => {

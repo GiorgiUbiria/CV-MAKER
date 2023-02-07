@@ -39,14 +39,9 @@ const Resume = (props: any) => {
   }, []);
 
   return (
-    <div className="cv" style={{ width: "50%" }}>
+    <div >
       <div className="general_information">
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
+        <div>
           <h1 style={{ color: "#F93B1D" }}>
             {" "}
             {generalInfo?.name} {generalInfo?.surname}{" "}
@@ -106,7 +101,7 @@ const Resume = (props: any) => {
             height: "250px",
             objectFit: "cover",
             position: "absolute",
-            right: "20px",
+            right: "600px",
             top: "50px",
           }}
         />
@@ -115,7 +110,6 @@ const Resume = (props: any) => {
       <div
         className="experience"
         style={{
-          marginLeft: "100px",
           marginTop: "30px",
           display: "flex",
           flexDirection: "column",
@@ -149,7 +143,6 @@ const Resume = (props: any) => {
       <div
         className="education"
         style={{
-          marginLeft: "100px",
           marginTop: "30px",
           display: "flex",
           flexDirection: "column",
@@ -170,6 +163,17 @@ const Resume = (props: any) => {
           </>
         ))}
       </div>
+      <img
+        src="/cv-logo.png"
+        alt="cv_logo"
+        style={{
+          width: "50px",
+          height: "auto",
+          position: "absolute",
+          bottom: "50px",
+          left: "520px",
+        }}
+      />
     </div>
   );
 };
