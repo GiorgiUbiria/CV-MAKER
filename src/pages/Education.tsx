@@ -10,7 +10,7 @@ import "./GeneralInformation.css";
 
 const element = <FontAwesomeIcon icon={faAngleLeft} />;
 
-const Education = ({ handleEducationData }: any) => {
+const Education = ({ handleEducationData, page }: any) => {
   const [educationData, setEducationData] = useState(null);
 
   const handleDataFromFields = (data: any) => {
@@ -39,13 +39,24 @@ const Education = ({ handleEducationData }: any) => {
         <h1
           style={{
             marginLeft: "250px",
-            marginTop: "30px",
-            fontSize: "48px",
+            marginTop: "50px",
+            fontSize: "36px",
           }}
         >
           {" "}
           განათლება{" "}
         </h1>
+        <span
+          style={{
+            position: "absolute",
+            left: "850px",
+            top: "60px",
+            fontSize: "28px",
+          }}
+        >
+          {" "}
+          {page.current + 2}/3{" "}
+        </span>
         <hr className="general_hr" />
         <Form onDataFromFields={handleDataFromFields} />
       </div>

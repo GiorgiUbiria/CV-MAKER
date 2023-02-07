@@ -100,7 +100,9 @@ const FormTemplate = ({ id, onChange, values, disabled }: any) => {
           color="warning"
           placeholder="დეველოპერი, დიზაინერი, ა.შ"
         />
-        <FormHelperText style={{ marginLeft: "-2px" }}>მინიმუმ 2 სიმბოლო</FormHelperText>
+        <FormHelperText style={{ marginLeft: "-2px" }}>
+          მინიმუმ 2 სიმბოლო
+        </FormHelperText>
       </FormControl>
 
       <FormControl required>
@@ -117,13 +119,15 @@ const FormTemplate = ({ id, onChange, values, disabled }: any) => {
           onBlur={handleBlur("employer")}
           placeholder="დამსაქმებელი"
         />
-        <FormHelperText style={{ marginLeft: "-2px" }}>მინიმუმ 2 სიმბოლო</FormHelperText>
+        <FormHelperText style={{ marginLeft: "-2px" }}>
+          მინიმუმ 2 სიმბოლო
+        </FormHelperText>
       </FormControl>
 
       <div className="date_inputs" style={{ display: "flex", gap: "170px" }}>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <span style={{ fontSize: "18px", marginBottom: "5px" }}>
-            დასრულების თარიღი
+            დაწყების თარიღი
           </span>
           <input
             type="date"
@@ -142,7 +146,7 @@ const FormTemplate = ({ id, onChange, values, disabled }: any) => {
 
         <div style={{ display: "flex", flexDirection: "column" }}>
           <span style={{ fontSize: "18px", marginBottom: "5px" }}>
-            დაწყების თარიღი
+            დასრულების თარიღი
           </span>
           <input
             type="date"

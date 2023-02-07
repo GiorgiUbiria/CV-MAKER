@@ -124,7 +124,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
             }}
             onClick={handleForwardButtonClick}
             disabled={buttonDisabled}
-          > 
+          >
             შემდეგი
           </Button>
         </div>

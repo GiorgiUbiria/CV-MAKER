@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+
 import { Routes, Route, useLocation } from "react-router-dom";
 
 import { Main } from "./pages/Main";
 import GeneralInformation from "./pages/GeneralInformation";
 import Experience from "./pages/Experience";
 import Education from "./pages/Education";
-import Resume from "./pages/Resume";
+import LastPage from "./pages/LastPage";
 
 import CVDisplay from "./components/CVDisplay";
 
@@ -15,6 +16,8 @@ function App() {
   const [handleData, setHandleData] = useState();
   const [handleExperienceData, setHandleExperienceData] = useState();
   const [handleEducationData, setHandleEducationData] = useState();
+
+  const pageNumber = useRef(1);
 
   const location = useLocation();
 
@@ -32,29 +35,40 @@ function App() {
 
   return (
     <div className="app">
-      <div className="routes">
+      <div className="routes" style={{ width: "60%" }}>
         <Routes>
           <Route path="/" element={<Main />} />
           <Route
             path="/general_information"
-            element={<GeneralInformation handleData={handleDataFromFields} />}
+            element={
+              <GeneralInformation
+                handleData={handleDataFromFields}
+                page={pageNumber}
+              />
+            }
           />
           <Route
             path="/experience"
             element={
-              <Experience handleExperienceData={handleDataFromExperience} />
+              <Experience
+                handleExperienceData={handleDataFromExperience}
+                page={pageNumber}
+              />
             }
           />
           <Route
             path="/education"
             element={
-              <Education handleEducationData={handleDataFromEducation} />
+              <Education
+                handleEducationData={handleDataFromEducation}
+                page={pageNumber}
+              />
             }
           />
           <Route
             path="/cvs"
             element={
-              <Resume
+              <LastPage
                 fieldValues={handleData}
                 experienceData={handleExperienceData}
                 educationData={handleEducationData}

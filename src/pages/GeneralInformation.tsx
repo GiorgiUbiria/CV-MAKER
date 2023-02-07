@@ -8,7 +8,7 @@ import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 
 const element = <FontAwesomeIcon icon={faAngleLeft} />;
 
-const GeneralInformation = ({ handleData }: any) => {
+const GeneralInformation = ({ handleData, page }: any) => {
   const [dataFromField, setDataFromField] = useState(null);
 
   const handleDataFromFields = (data: any) => {
@@ -37,13 +37,24 @@ const GeneralInformation = ({ handleData }: any) => {
         <h1
           style={{
             marginLeft: "250px",
-            marginTop: "30px",
-            fontSize: "48px",
+            marginTop: "50px",
+            fontSize: "36px",
           }}
         >
           {" "}
           პირადი ინფორმაცია{" "}
         </h1>
+        <span
+          style={{
+            position: "absolute",
+            left: "850px",
+            top: "60px",
+            fontSize: "28px",
+          }}
+        >
+          {" "}
+          {page.current}/3{" "}
+        </span>
         <hr className="general_hr" />
         <Form onDataFromFields={handleDataFromFields} />
       </div>

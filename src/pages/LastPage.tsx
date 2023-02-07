@@ -1,5 +1,5 @@
-import { Link} from "react-router-dom";
-import CVDisplay from "../components/CVDisplay";
+import { Link } from "react-router-dom";
+import Resume from "../components/Resume";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
@@ -8,7 +8,7 @@ import "./Resume.css";
 
 const element = <FontAwesomeIcon icon={faAngleLeft} />;
 
-const Resume = (props: any) => {
+const LastPage = (props: any) => {
   const { fieldValues, experienceData, educationData } = props;
 
   const handleReset = () => {
@@ -16,7 +16,7 @@ const Resume = (props: any) => {
   };
 
   return (
-    <>
+    <div style={{}}>
       <Link
         onClick={handleReset}
         to="/"
@@ -30,13 +30,13 @@ const Resume = (props: any) => {
       >
         {element}
       </Link>
-      <CVDisplay
+      <Resume
         fieldValues={fieldValues}
         experienceData={experienceData}
         educationData={educationData}
       />
-    </>
+    </div>
   );
 };
 
-export default Resume;
+export default LastPage;

@@ -125,59 +125,78 @@ const CVDisplay = (props: any) => {
         />
         <div />
       </div>
-      <div
-        className="experience"
-        style={{
-          marginLeft: "100px",
-          marginTop: "30px",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <h2 style={{ color: "#F93B1D" }}> გამოცდილება </h2>
-        {experienceFormData?.map((data: any) => (
-          <>
-            <h5 style={{ marginTop: "10px" }} key={data.id + "_position"}>
-              {" "}
-              {data?.values?.position}{" "}
-            </h5>
-            <h5 style={{ marginTop: "10px" }} key={data.id + "_employer"}>
-              {" "}
-              {data?.values?.employer}{" "}
-            </h5>
-            <p key={data.id + "_start_date"}>
-              {" "}
-              {data?.values?.start_date} - {data?.values?.due_date}
-            </p>
-            <p key={data.id + "_description"}>{data?.values?.description}</p>
-            <br />
-          </>
-        ))}
-      </div>
-      <div
-        className="education"
-        style={{
-          marginLeft: "100px",
-          marginTop: "30px",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <h2 style={{ color: "#F93B1D" }}> განათლება </h2>
-        {educationFormData?.map((data: any) => (
-          <>
-            <p style={{ marginTop: "10px" }} key={data.id + "_institute"}>
-              {" "}
-              {data?.values?.institute}
-              {", "}
-              {data?.values?.degree}
-            </p>
-            <p key={data.id + "_due_date"}> {data?.values?.due_date}</p>
-            <p key={data.id + "_description"}>{data?.values?.description}</p>
-            <br />
-          </>
-        ))}
-      </div>
+
+      {experienceFormData !== null && (
+        <>
+          <div
+            className="experience"
+            style={{
+              marginLeft: "100px",
+              marginTop: "30px",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <h2 style={{ color: "#F93B1D" }}> გამოცდილება </h2>
+            {experienceFormData?.map((data: any) => (
+              <>
+                <h5
+                  style={{ marginTop: "10px", fontSize: "20px" }}
+                  key={data.id + "_position"}
+                >
+                  {" "}
+                  {data?.values?.position}, {data?.values?.employer}{" "}
+                </h5>
+                <p
+                  key={data.id + "_start_date"}
+                  style={{ color: "gray", marginTop: "5px" }}
+                >
+                  <i>
+                    {" "}
+                    {data?.values?.start_date} - {data?.values?.due_date}
+                  </i>
+                </p>
+                <p key={data.id + "_description"}>
+                  {data?.values?.description}
+                </p>
+                <br />
+              </>
+            ))}
+          </div>
+          <hr />
+        </>
+      )}
+
+      {educationFormData !== null && (
+        <>
+          <div
+            className="education"
+            style={{
+              marginLeft: "100px",
+              marginTop: "30px",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <h2 style={{ color: "#F93B1D" }}> განათლება </h2>
+            {educationFormData?.map((data: any) => (
+              <>
+                <p style={{ marginTop: "10px" }} key={data.id + "_institute"}>
+                  {" "}
+                  {data?.values?.institute}
+                  {", "}
+                  {data?.values?.degree}
+                </p>
+                <p key={data.id + "_due_date"}> {data?.values?.due_date}</p>
+                <p key={data.id + "_description"}>
+                  {data?.values?.description}
+                </p>
+                <br />
+              </>
+            ))}
+          </div>
+        </>
+      )}
     </>
   );
 };

@@ -10,7 +10,7 @@ import "./GeneralInformation.css";
 
 const element = <FontAwesomeIcon icon={faAngleLeft} />;
 
-const Experience = ({ handleExperienceData }: any) => {
+const Experience = ({ handleExperienceData, page }: any) => {
   const [experienceData, setExperienceData] = useState(null);
 
   const handleDataFromFields = (data: any) => {
@@ -39,13 +39,24 @@ const Experience = ({ handleExperienceData }: any) => {
         <h1
           style={{
             marginLeft: "250px",
-            marginTop: "30px",
-            fontSize: "48px",
+            marginTop: "50px",
+            fontSize: "36px",
           }}
         >
           {" "}
           გამოცდილება{" "}
         </h1>
+        <span
+          style={{
+            position: "absolute",
+            left: "850px",
+            top: "60px",
+            fontSize: "28px",
+          }}
+        >
+          {" "}
+          {page.current + 1}/3
+        </span>
         <hr className="general_hr" />
         <Form onDataFromFields={handleDataFromFields} />
       </div>
