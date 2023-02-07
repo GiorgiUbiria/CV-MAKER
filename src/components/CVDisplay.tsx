@@ -167,17 +167,17 @@ const CVDisplay = (props: any) => {
         </>
       )}
 
-      {educationFormData !== null && (
-        <>
-          <div
-            className="education"
-            style={{
-              marginLeft: "100px",
-              marginTop: "30px",
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
+      <div
+        className="education"
+        style={{
+          marginLeft: "100px",
+          marginTop: "30px",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        {educationFormData !== null && (
+          <>
             <h2 style={{ color: "#F93B1D" }}> განათლება </h2>
             {educationFormData?.map((data: any) => (
               <>
@@ -191,23 +191,21 @@ const CVDisplay = (props: any) => {
                 <p key={data.id + "_description"}>
                   {data?.values?.description}
                 </p>
-                <br />
               </>
             ))}
-          </div>
-        </>
-      )}
-      <img
-        src="/cv-logo.png"
-        alt="cv_logo"
-        style={{
-          width: "50px",
-          height: "auto",
-          position: "fixed",
-          bottom: "5px",
-          right: "650px",
-        }}
-      />
+          </>
+        )}
+        <img
+          src="/cv-logo.png"
+          alt="cv_logo"
+          style={{
+            width: "50px",
+            height: "auto",
+            position: "relative",
+            top: "100px",
+          }}
+        />
+      </div>
     </>
   );
 };

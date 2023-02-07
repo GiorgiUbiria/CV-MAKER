@@ -53,31 +53,61 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
     const educationInfo = JSON.parse(
       localStorage.getItem("education") as string
     );
-
     const file = dataURLtoFile(generalInfo.image, "image.png");
 
     const formData = new FormData();
+
     formData.append("about_me", generalInfo.about_me);
     formData.append("email", generalInfo.email);
     formData.append("name", generalInfo.name);
     formData.append("phone_number", generalInfo.phone_number);
     formData.append("surname", generalInfo.surname);
     formData.append("image", file, "image.png");
-    formData.append(
-      "experiences",
-      experienceInfo.map((obj: any) => obj.values)
-    );
-    formData.append(
-      "educations",
-      educationInfo.map((obj: any) => obj.values)
-    );
 
-    for (let pair of formData.entries()) {
-      console.log(pair[0] + ": " + pair[1]);
-    }
+    experienceInfo.forEach((data: any, index: number) => {
+      formData.append(
+        `experiences[${index}][position]`,
+        data.values.position.toString()
+      );
+      formData.append(
+        `experiences[${index}][employer]`,
+        data.values.employer.toString()
+      );
+      formData.append(
+        `experiences[${index}][start_date]`,
+        data.values.start_date.toString()
+      );
+      formData.append(
+        `experiences[${index}][due_date]`,
+        data.values.due_date.toString()
+      );
+      formData.append(
+        `experiences[${index}][description]`,
+        data.values.description.toString()
+      );
+    });
+
+    educationInfo.forEach((data: any, index: number) => {
+      formData.append(
+        `educations[${index}][institute]`,
+        data.values.institute.toString()
+      );
+      formData.append(
+        `educations[${index}][degree_id]`,
+        data.values.degree.toString()
+      );
+      formData.append(
+        `educations[${index}][due_date]`,
+        data.values.due_date.toString()
+      );
+      formData.append(
+        `educations[${index}][description]`,
+        data.values.description.toString()
+      );
+    });
 
     try {
-      /*       const response = await axios.post(
+      const response = await axios.post(
         "https://resume.redberryinternship.ge/api/cvs",
         formData,
         {
@@ -86,7 +116,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
           },
         }
       );
-      console.log(response.data); */
+      console.log(response.data);
 
       navigate("/cvs");
     } catch (error) {

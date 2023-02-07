@@ -79,6 +79,8 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
   const [selectedOption, setSelectedOption] = useState("");
 
   const handleOptionChange = (event: any) => {
+    console.log(event.target);
+
     setSelectedOption(event.target.value as string);
     onChange({ target: { name: `degree-${id}`, value: event.target.value } });
   };
@@ -145,7 +147,7 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
               <em>აირჩიეთ ხარისხი</em>
             </MenuItem>
             {options.map((option: any) => (
-              <MenuItem key={option.id} value={option.title}>
+              <MenuItem key={option.id} value={option.id}>
                 {option.title}
               </MenuItem>
             ))}

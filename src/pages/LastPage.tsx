@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 
 import style from "./LastPage.module.css";
+import Popup from "../components/Popup";
 
 const element = <FontAwesomeIcon icon={faAngleLeft} />;
 
@@ -30,6 +31,8 @@ const LastPage = (props: any) => {
       >
         {element}
       </Link>
+      <Popup />
+
       <div className={style.cv}>
         <Resume
           fieldValues={fieldValues}

@@ -39,73 +39,71 @@ const Resume = (props: any) => {
   }, []);
 
   return (
-    <div >
+    <div>
       <div className="general_information">
-        <div>
-          <h1 style={{ color: "#F93B1D" }}>
-            {" "}
-            {generalInfo?.name} {generalInfo?.surname}{" "}
-          </h1>
+        <div style={{ display: "flex", gap: "4rem" }}>
+          <div>
+            <h1 style={{ color: "#F93B1D" }}>
+              {" "}
+              {generalInfo?.name} {generalInfo?.surname}{" "}
+            </h1>
 
-          <p
-            style={{
-              marginTop: "30px",
-              color: "#7E7E7E",
-              fontSize: "20px",
-            }}
-          >
-            <span style={{ marginRight: "10px" }}>{element2}</span>
-            {generalInfo?.phone_number}
-          </p>
-
-          <p style={{ color: "#7E7E7E", fontSize: "20px" }}>
-            <span style={{ marginRight: "10px" }}>{element}</span>{" "}
-            {generalInfo?.email}
-          </p>
-          <div
-            className="about_me"
-            style={{
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <h4 style={{ color: "#F93B1D", marginTop: "30px" }}>ჩემ შესახებ</h4>
             <p
               style={{
-                marginTop: "10px",
-                width: "400px",
-                fontSize: "17px",
-                fontWeight: "500",
-                wordWrap: "break-word",
-                display: "block",
+                marginTop: "30px",
+                color: "#7E7E7E",
+                fontSize: "20px",
               }}
             >
-              {" "}
-              {generalInfo?.about_me}
+              <span style={{ marginRight: "10px" }}>{element2}</span>
+              {generalInfo?.phone_number}
             </p>
 
-            <hr
+            <p style={{ color: "#7E7E7E", fontSize: "20px" }}>
+              <span style={{ marginRight: "10px" }}>{element}</span>{" "}
+              {generalInfo?.email}
+            </p>
+            <div
+              className="about_me"
               style={{
-                width: "90%",
-                marginTop: "10px",
+                display: "flex",
+                flexDirection: "column",
               }}
-            />
+            >
+              <h4 style={{ color: "#F93B1D", marginTop: "30px" }}>
+                ჩემ შესახებ
+              </h4>
+              <p
+                style={{
+                  marginTop: "10px",
+                  width: "400px",
+                  fontSize: "17px",
+                  fontWeight: "500",
+                  wordWrap: "break-word",
+                  display: "block",
+                }}
+              >
+                {" "}
+                {generalInfo?.about_me}
+              </p>
+            </div>
           </div>
+          <img
+            src={generalInfo?.image}
+            alt="Image"
+            style={{
+              borderRadius: "50%",
+              width: "250px",
+              height: "250px",
+              objectFit: "cover",
+            }}
+          />
         </div>
-        <img
-          src={generalInfo?.image}
-          alt="Image"
+        <hr
           style={{
-            borderRadius: "50%",
-            width: "250px",
-            height: "250px",
-            objectFit: "cover",
-            position: "absolute",
-            right: "600px",
-            top: "50px",
+            marginTop: "20px",
           }}
         />
-        <div />
       </div>
       <div
         className="experience"
@@ -159,21 +157,19 @@ const Resume = (props: any) => {
             </p>
             <p key={data.id + "_due_date"}> {data?.values?.due_date}</p>
             <p key={data.id + "_description"}>{data?.values?.description}</p>
-            <br />
           </>
         ))}
+        <img
+          src="/cv-logo.png"
+          alt="cv_logo"
+          style={{
+            width: "50px",
+            height: "auto",
+            position: "relative",
+            top: "100px",
+          }}
+        />
       </div>
-      <img
-        src="/cv-logo.png"
-        alt="cv_logo"
-        style={{
-          width: "50px",
-          height: "auto",
-          position: "absolute",
-          bottom: "50px",
-          left: "520px",
-        }}
-      />
     </div>
   );
 };
