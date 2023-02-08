@@ -14,6 +14,8 @@ const validate = (values: any) => {
     errors.position = "Position is required";
   } else if (values.position.length < 2) {
     errors.position = "Position must be at least 2 characters long";
+  } else if (values.position.charAt(0) === " ") {
+    errors.position = "Position cannot start with a space";
   } else {
     delete errors.position;
   }
@@ -22,6 +24,8 @@ const validate = (values: any) => {
     errors.employer = "employer is required";
   } else if (values.employer.length < 2) {
     errors.employer = "Employer must be at least 2 characters long";
+  } else if (values.employer.charAt(0) === " ") {
+    errors.employer = "Employer cannot start with a space";
   } else {
     delete errors.employer;
   }
@@ -134,6 +138,7 @@ const FormTemplate = ({ id, onChange, values, disabled }: any) => {
             name={`start_date-${id}`}
             id="start_date"
             onChange={onChange}
+            value={values.start_date}
             style={{
               height: "50px",
               borderRadius: "5px",
@@ -153,6 +158,7 @@ const FormTemplate = ({ id, onChange, values, disabled }: any) => {
             name={`due_date-${id}`}
             id="due_date"
             onChange={onChange}
+            value={values.due_date}
             style={{
               height: "50px",
               borderRadius: "5px",

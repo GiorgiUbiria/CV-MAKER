@@ -19,6 +19,8 @@ const validate = (values: any) => {
 
   if (!values.institute) {
     errors.institute = "Institute is required";
+  } else if (values.institute.charAt(0) === " ") {
+    errors.institute = "Institute cannot start with a space";
   } else {
     delete errors.institute;
   }
@@ -75,19 +77,11 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
   }, [values]);
 
   const [options, setOptions] = useState([]);
-  const [date, setDate] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
 
   const handleOptionChange = (event: any) => {
-    console.log(event.target);
-
     setSelectedOption(event.target.value as string);
     onChange({ target: { name: `degree-${id}`, value: event.target.value } });
-  };
-
-  const handleDateChange = (event: any) => {
-    setDate(event.target.value as string);
-    onChange({ target: { name: `due_date-${id}`, value: event.target.value } });
   };
 
   useEffect(() => {
@@ -158,8 +152,8 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
           type="date"
           name={`due_date-${id}`}
           id="due_date"
-          onChange={handleDateChange}
-          value={date}
+          onChange={onChange}
+          value={values.due_date}
           style={{
             width: "30%",
             marginRight: "260px",

@@ -201,13 +201,42 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
         </FormControl>
       </div>
 
-      <input
-        type="file"
-        name="image"
-        id="img"
-        onChange={handleImageChange}
-        onBlur={handleBlur("image")}
-      />
+      <FormControl required>
+        <p
+          style={{
+            color: "black",
+            fontSize: "24px",
+            position: "relative",
+            top: "35px",
+          }}
+        >
+          პირადი ფოტოს ატვირთვა
+        </p>
+        <div className="upload" style={{ marginLeft: "330px" }}>
+          <Button
+            type="button"
+            variant="contained"
+            style={{ width: "225px", cursor: "pointer" }}
+          >
+            ატვირთვა
+          </Button>
+          <input
+            type="file"
+            name="image"
+            id="img"
+            onChange={handleImageChange}
+            onBlur={handleBlur("image")}
+            style={{
+              position: "absolute",
+              cursor: "pointer",
+              left: "280px",
+              top: "30px",
+              opacity: "0",
+              transform: "scale(0.7)",
+            }}
+          />
+        </div>
+      </FormControl>
 
       <FormControl>
         <FormLabel style={{ color: "black", marginBottom: "5px" }}>
