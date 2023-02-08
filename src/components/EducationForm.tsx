@@ -116,8 +116,10 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
           },
         }
       );
-      console.log(response.data);
-
+      localStorage.setItem("finalResults", JSON.stringify(response.data));
+      localStorage.removeItem("education");
+      localStorage.removeItem("forms");
+      localStorage.removeItem("form-data");
       navigate("/cvs");
     } catch (error) {
       console.log(error);

@@ -7,39 +7,47 @@ import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { FormControl, FormHelperText, FormLabel, styled } from "@mui/material";
 const element = <FontAwesomeIcon icon={faTriangleExclamation} />;
 
-const validate = (values: any) => {
+const validate = (values: any, id: any) => {
   const errors: { [key: string]: string } = {};
 
-  if (!values.position) {
-    errors.position = "Position is required";
-  } else if (values.position.length < 2) {
-    errors.position = "Position must be at least 2 characters long";
-  } else if (values.position.charAt(0) === " ") {
-    errors.position = "Position cannot start with a space";
+  const { position, employer, start_date, due_date, description } = values;
+
+  if (!position) {
+    errors[`position-${id}`] = "Position is required";
+  } else if (position.length < 2) {
+    errors[`position-${id}`] = "Position must be at least 2 characters long";
+  } else if (position.charAt(0) === " ") {
+    errors[`position-${id}`] = "Position cannot start with a space";
   } else {
-    delete errors.position;
+    delete errors[`position-${id}`];
   }
 
-  if (!values.employer) {
-    errors.employer = "employer is required";
-  } else if (values.employer.length < 2) {
-    errors.employer = "Employer must be at least 2 characters long";
-  } else if (values.employer.charAt(0) === " ") {
-    errors.employer = "Employer cannot start with a space";
+  if (!employer) {
+    errors[`employer-${id}`] = "employer is required";
+  } else if (employer.length < 2) {
+    errors[`employer-${id}`] = "Employer must be at least 2 characters long";
+  } else if (employer.charAt(0) === " ") {
+    errors[`employer-${id}`] = "Employer cannot start with a space";
   } else {
-    delete errors.employer;
+    delete errors[`employer-${id}`];
   }
 
-  if (!values.start_date) {
-    errors.start_date = "start_date is required";
+  if (!start_date) {
+    errors[`start_date-${id}`] = "start_date is required";
   } else {
-    delete errors.start_date;
+    delete errors[`start_date-${id}`];
   }
 
-  if (!values.due_date) {
-    errors.due_date = "due_date is required";
+  if (!due_date) {
+    errors[`due_date-${id}`] = "due_date is required";
   } else {
-    delete errors.due_date;
+    delete errors[`due_date-${id}`];
+  }
+
+  if (!description) {
+    errors[`description-${id}`] = "Description is required";
+  } else {
+    delete errors[`description-${id}`];
   }
 
   return errors;
@@ -68,13 +76,13 @@ const FormTemplate = ({ id, onChange, values, disabled }: any) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setErrors(validate(values));
+    setErrors(validate({ ...values }, id));
   };
 
   useEffect(() => {
-    setErrors(validate(values));
+    setErrors(validate({ ...values }, id));
     disabled(isDisabled);
-  }, [values]);
+  }, [values, isDisabled]);
 
   return (
     <form
@@ -146,6 +154,7 @@ const FormTemplate = ({ id, onChange, values, disabled }: any) => {
               backgroundColor: "#f9f9f9",
               width: "220px",
             }}
+            onBlur={handleBlur("start_date")}
           />
         </div>
 
@@ -166,6 +175,7 @@ const FormTemplate = ({ id, onChange, values, disabled }: any) => {
               backgroundColor: "#f9f9f9",
               width: "220px",
             }}
+            onBlur={handleBlur("due_date")}
           />
         </div>
       </div>

@@ -39,7 +39,7 @@ const CVDisplay = (props: any) => {
   }, [educationData]);
 
   return (
-    <>
+    <div style={{ minHeight: "100vh" }}>
       <div className="general_information">
         <div
           style={{
@@ -195,18 +195,8 @@ const CVDisplay = (props: any) => {
             ))}
           </>
         )}
-        <img
-          src="/cv-logo.png"
-          alt="cv_logo"
-          style={{
-            width: "50px",
-            height: "auto",
-            position: "relative",
-            top: "100px",
-          }}
-        />
       </div>
-    </>
+    </div>
   );
 };
 

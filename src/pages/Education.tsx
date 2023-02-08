@@ -58,7 +58,9 @@ const Education = ({ handleEducationData, page }: any) => {
           {page.current + 2}/3{" "}
         </span>
         <hr className={style.general_hr} />
-        <Form onDataFromFields={handleDataFromFields} />
+        <Form
+          onDataFromFields={handleDataFromFields}
+        />
       </div>
     </div>
   );

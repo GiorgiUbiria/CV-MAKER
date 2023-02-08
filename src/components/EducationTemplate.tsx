@@ -17,30 +17,32 @@ const element = <FontAwesomeIcon icon={faTriangleExclamation} />;
 const validate = (values: any) => {
   const errors: { [key: string]: string } = {};
 
-  if (!values.institute) {
-    errors.institute = "Institute is required";
-  } else if (values.institute.charAt(0) === " ") {
-    errors.institute = "Institute cannot start with a space";
+  const { institute, degree, due_date, description, id } = values;
+
+  if (!institute) {
+    errors[`institute-${id}`] = "Institute is required";
+  } else if (institute.charAt(0) === " ") {
+    errors[`institute-${id}`] = "Institute cannot start with a space";
   } else {
-    delete errors.institute;
+    delete errors[`institute-${id}`];
   }
 
-  if (!values.degree) {
-    errors.degree = "Degree is required";
+  if (!degree) {
+    errors[`degree-${id}`] = "Degree is required";
   } else {
-    delete errors.degree;
+    delete errors[`degree-${id}`];
   }
 
-  if (!values.due_date) {
-    errors.due_date = "due_date is required";
+  if (!due_date) {
+    errors[`degree-${id}`] = "due_date is required";
   } else {
-    delete errors.due_date;
+    delete errors[`degree-${id}`];
   }
 
-  if (!values.description) {
-    errors.description = "Description is required";
+  if (!description) {
+    errors[`description-${id}`] = "Description is required";
   } else {
-    delete errors.description;
+    delete errors[`description-${id}`];
   }
 
   return errors;
@@ -68,13 +70,13 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setErrors(validate(values));
+    setErrors(validate({ ...values, id }));
   };
 
   useEffect(() => {
-    setErrors(validate(values));
+    setErrors(validate({ ...values, id }));
     disabled(isDisabled);
-  }, [values]);
+  }, [values, isDisabled]);
 
   const [options, setOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState("");
@@ -163,6 +165,7 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
             marginTop: "25px",
             backgroundColor: "#f9f9f9",
           }}
+          onBlur={handleBlur("due_date")}
         />
       </div>
 

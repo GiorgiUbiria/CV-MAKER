@@ -6,36 +6,17 @@ import { useEffect, useState } from "react";
 const element = <FontAwesomeIcon icon={faAt} />;
 const element2 = <FontAwesomeIcon icon={faPhone} />;
 
-const Resume = (props: any) => {
-  const { fieldValues, experienceData, educationData } = props;
-
-  const [generalInfo, setGeneralInfo] = useState(() => {
-    const generalData = localStorage.getItem("form-data");
-    return generalData ? JSON.parse(generalData) : fieldValues;
-  });
-
-  const [experienceFormData, setExperienceFormData] = useState(() => {
-    const experience = localStorage.getItem("forms");
-    return experience ? JSON.parse(experience) : experienceData;
-  });
-
-  const [educationFormData, setEducationFormData] = useState(() => {
-    const education = localStorage.getItem("education");
-    return education ? JSON.parse(education) : educationData;
+const Resume = () => {
+  const [data, setData] = useState(() => {
+    const storedValues = localStorage.getItem("finalData");
+    return storedValues ? JSON.parse(storedValues) : null;
   });
 
   useEffect(() => {
-    setGeneralInfo(JSON.parse(localStorage.getItem("form-data") as string));
-  }, []);
-
-  useEffect(() => {
-    setExperienceFormData(JSON.parse(localStorage.getItem("forms") as string));
-  }, []);
-
-  useEffect(() => {
-    setEducationFormData(
-      JSON.parse(localStorage.getItem("education") as string)
+    const finalResults = JSON.parse(
+      localStorage.getItem("finalResults") as string
     );
+    setData(finalResults);
   }, []);
 
   return (
@@ -45,7 +26,7 @@ const Resume = (props: any) => {
           <div>
             <h1 style={{ color: "#F93B1D" }}>
               {" "}
-              {generalInfo?.name} {generalInfo?.surname}{" "}
+              {data?.name} {data?.surname}{" "}
             </h1>
 
             <p
@@ -56,12 +37,12 @@ const Resume = (props: any) => {
               }}
             >
               <span style={{ marginRight: "10px" }}>{element2}</span>
-              {generalInfo?.phone_number}
+              {data?.phone_number}
             </p>
 
             <p style={{ color: "#7E7E7E", fontSize: "20px" }}>
               <span style={{ marginRight: "10px" }}>{element}</span>{" "}
-              {generalInfo?.email}
+              {data?.email}
             </p>
             <div
               className="about_me"
@@ -84,12 +65,12 @@ const Resume = (props: any) => {
                 }}
               >
                 {" "}
-                {generalInfo?.about_me}
+                {data?.about_me}
               </p>
             </div>
           </div>
           <img
-            src={generalInfo?.image}
+            src={`https://resume.redberryinternship.ge${data?.image}`}
             alt="Image"
             style={{
               borderRadius: "50%",
@@ -114,25 +95,25 @@ const Resume = (props: any) => {
         }}
       >
         <h2 style={{ color: "#F93B1D" }}> გამოცდილება </h2>
-        {experienceFormData?.map((data: any) => (
+        {data?.experiences.map((field: any) => (
           <>
             <h5
               style={{ marginTop: "10px", fontSize: "20px" }}
-              key={data.id + "_position"}
+              key={field.id + "_position"}
             >
               {" "}
-              {data?.values?.position}, {data?.values?.employer}{" "}
+              {field?.position}, {field?.employer}{" "}
             </h5>
             <p
-              key={data.id + "_start_date"}
+              key={field.id + "_start_date"}
               style={{ color: "gray", marginTop: "5px" }}
             >
               <i>
                 {" "}
-                {data?.values?.start_date} - {data?.values?.due_date}
+                {field?.start_date} - {field?.due_date}
               </i>
             </p>
-            <p key={data.id + "_description"}>{data?.values?.description}</p>
+            <p key={field.id + "_description"}>{field?.description}</p>
             <br />
           </>
         ))}
@@ -147,16 +128,16 @@ const Resume = (props: any) => {
         }}
       >
         <h2 style={{ color: "#F93B1D" }}> განათლება </h2>
-        {educationFormData?.map((data: any) => (
+        {data?.educations.map((field: any) => (
           <>
-            <p style={{ marginTop: "10px" }} key={data.id + "_institute"}>
+            <p style={{ marginTop: "10px" }} key={field.id + "_institute"}>
               {" "}
-              {data?.values?.institute}
+              {field?.institute}
               {", "}
-              {data?.values?.degree}
+              {field?.degree}
             </p>
-            <p key={data.id + "_due_date"}> {data?.values?.due_date}</p>
-            <p key={data.id + "_description"}>{data?.values?.description}</p>
+            <p key={field.id + "_due_date"}> {field?.due_date}</p>
+            <p key={field.id + "_description"}>{field?.description}</p>
           </>
         ))}
         <img

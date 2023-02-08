@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Resume from "../components/Resume";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,10 +9,11 @@ import Popup from "../components/Popup";
 
 const element = <FontAwesomeIcon icon={faAngleLeft} />;
 
-const LastPage = (props: any) => {
-  const { fieldValues, experienceData, educationData } = props;
+const LastPage = () => {
+  const navigate = useNavigate();
 
   const handleReset = () => {
+    navigate("/");
     localStorage.clear();
   };
 
@@ -34,11 +35,7 @@ const LastPage = (props: any) => {
       <Popup />
 
       <div className={style.cv}>
-        <Resume
-          fieldValues={fieldValues}
-          experienceData={experienceData}
-          educationData={educationData}
-        />
+        <Resume />
       </div>
     </div>
   );

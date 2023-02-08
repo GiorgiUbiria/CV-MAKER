@@ -64,16 +64,7 @@ function App() {
             />
           }
         />
-        <Route
-          path="/cvs"
-          element={
-            <LastPage
-              fieldValues={handleData}
-              experienceData={handleExperienceData}
-              educationData={handleEducationData}
-            />
-          }
-        />
+        <Route path="/cvs" element={<LastPage />} />
       </Routes>
       {location.pathname !== "/" && location.pathname !== "/cvs" && (
         <div className={style.cv}>
@@ -81,6 +72,17 @@ function App() {
             fieldValues={handleData}
             experienceData={handleExperienceData}
             educationData={handleEducationData}
+          />
+          <img
+            src="/cv-logo.png"
+            alt="cv_logo"
+            style={{
+              width: "50px",
+              height: "auto",
+              position: "fixed",
+              bottom: "10px",
+              right: "600px",
+            }}
           />
         </div>
       )}
