@@ -211,8 +211,7 @@ const CVDisplay = (props: any) => {
                   key={data.id + "_due_date"}
                   style={{ color: "gray", marginTop: "5px" }}
                 >
-                  {" "}
-                  {data?.values?.due_date}
+                  <i> {data?.values?.due_date}</i>
                 </p>
                 <p key={data.id + "_description"}>
                   {data?.values?.description}

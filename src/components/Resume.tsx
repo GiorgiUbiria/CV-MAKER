@@ -136,7 +136,13 @@ const Resume = () => {
               {", "}
               {field?.degree}
             </p>
-            <p key={field.id + "_due_date"}> {field?.due_date}</p>
+            <p
+              key={field.id + "_due_date"}
+              style={{ color: "gray", marginTop: "5px" }}
+            >
+              {" "}
+              <i>{field?.due_date}</i>
+            </p>
             <p key={field.id + "_description"}>{field?.description}</p>
           </>
         ))}
