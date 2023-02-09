@@ -115,6 +115,7 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
           helperText={
             fieldErrors.institute && errors.institute ? element : null
           }
+          color="success"
           onBlur={handleBlur("institute")}
           style={{ width: "70%" }}
           placeholder="სასწავლებელი"
@@ -137,6 +138,7 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
             value={values.degree ? values.degree : selectedOption}
             label="Age"
             onChange={handleOptionChange}
+            color="success"
             error={!!errors.degree && fieldErrors.degree}
           >
             <MenuItem disabled value="">
@@ -169,7 +171,7 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
         />
       </div>
 
-      <FormControl>
+      <FormControl required>
         <FormLabel style={{ color: "black", marginBottom: "5px" }}>
           აღწერა
         </FormLabel>
@@ -181,6 +183,7 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
           helperText={
             fieldErrors.description && errors.description ? element : null
           }
+          color="success"
           style={{ width: "70%" }}
           onBlur={handleBlur("description")}
           multiline

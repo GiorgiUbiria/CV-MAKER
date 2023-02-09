@@ -105,11 +105,11 @@ const FormTemplate = ({ id, onChange, values, disabled }: any) => {
           onChange={onChange}
           error={!!errors.position && fieldErrors.position}
           helperText={fieldErrors.position && errors.position ? element : null}
+          color="success"
           onBlur={handleBlur("position")}
           style={{
             width: "70%",
           }}
-          color="warning"
           placeholder="დეველოპერი, დიზაინერი, ა.შ"
         />
         <FormHelperText style={{ marginLeft: "-2px" }}>
@@ -127,6 +127,7 @@ const FormTemplate = ({ id, onChange, values, disabled }: any) => {
           onChange={onChange}
           error={!!errors.employer && fieldErrors.employer}
           helperText={fieldErrors.employer && errors.employer ? element : null}
+          color="success"
           style={{ width: "70%" }}
           onBlur={handleBlur("employer")}
           placeholder="დამსაქმებელი"
@@ -180,7 +181,7 @@ const FormTemplate = ({ id, onChange, values, disabled }: any) => {
         </div>
       </div>
 
-      <FormControl>
+      <FormControl required>
         <FormLabel style={{ color: "black", marginBottom: "5px" }}>
           აღწერა
         </FormLabel>
@@ -190,6 +191,7 @@ const FormTemplate = ({ id, onChange, values, disabled }: any) => {
           onChange={onChange}
           style={{ width: "70%" }}
           onBlur={handleBlur("description")}
+          color="success"
           multiline
           placeholder="როლი თანამდებობაზე და ზოგადი აღწერა"
         />

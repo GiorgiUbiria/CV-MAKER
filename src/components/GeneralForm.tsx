@@ -6,7 +6,12 @@ import TextField from "@mui/material/TextField";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
-import { FormControl, FormHelperText, FormLabel } from "@mui/material";
+import {
+  FormControl,
+  FormHelperText,
+  FormLabel,
+  withStyles,
+} from "@mui/material";
 
 const element = <FontAwesomeIcon icon={faTriangleExclamation} />;
 
@@ -171,8 +176,11 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
             onChange={handleChange}
             error={!!errors.name && fieldErrors.name}
             helperText={fieldErrors.name && errors.name ? element : null}
+            color="success"
             onBlur={handleBlur("name")}
-            style={{ width: "100%" }}
+            style={{
+              width: "100%",
+            }}
             placeholder="ამირან"
           />
           <FormHelperText style={{ marginLeft: "-2px" }}>
@@ -190,6 +198,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
             onChange={handleChange}
             error={!!errors.surname && fieldErrors.surname}
             helperText={fieldErrors.surname && errors.surname ? element : null}
+            color="success"
             style={{ width: "100%" }}
             onBlur={handleBlur("surname")}
             placeholder="გამყრელიძე"
@@ -264,6 +273,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
           onChange={handleChange}
           error={!!errors.email && fieldErrors.email}
           helperText={fieldErrors.email && errors.email ? element : null}
+          color="success"
           style={{ width: "70%" }}
           onBlur={handleBlur("email")}
           placeholder="amiran623@redberry.ge"
@@ -285,6 +295,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
           helperText={
             fieldErrors.phone_number && errors.phone_number ? element : null
           }
+          color="success"
           style={{ width: "70%" }}
           onBlur={handleBlur("phone_number")}
           placeholder="+995551012307"

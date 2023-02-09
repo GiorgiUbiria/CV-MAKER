@@ -6,7 +6,7 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 const element = <FontAwesomeIcon icon={faXmark} />;
 
 const Popup = () => {
-  const [showPopup, setShowPopup] = useState(true);
+  const [showPopup, setShowPopup] = useState(false);
 
   return (
     <Fragment>
@@ -27,7 +27,7 @@ const Popup = () => {
           }}
         >
           <p style={{ fontSize: "24px", marginLeft: "10px" }}>
-            რეზიუმე წარმატებით გაიგზავნა
+            რეზიუმე წარმატებით გაიგზავნა 🎉
           </p>
           <button
             onClick={() => setShowPopup(false)}
