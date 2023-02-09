@@ -7,6 +7,9 @@ const element = <FontAwesomeIcon icon={faAt} />;
 const element2 = <FontAwesomeIcon icon={faPhone} />;
 
 const CVDisplay = (props: any) => {
+  const [degrees, setDegrees] = useState();
+
+  console.log(degrees);
   const { fieldValues, experienceData, educationData } = props;
 
   const [generalInfo, setGeneralInfo] = useState(() => {
@@ -23,6 +26,12 @@ const CVDisplay = (props: any) => {
     const education = localStorage.getItem("education");
     return education ? JSON.parse(education) : educationData;
   });
+
+  useEffect(() => {
+    fetch("https://resume.redberryinternship.ge/api/degrees")
+      .then((response) => response.json())
+      .then((data) => setDegrees(data));
+  }, []);
 
   useEffect(() => {
     setGeneralInfo(JSON.parse(localStorage.getItem("form-data") as string));
@@ -49,81 +58,83 @@ const CVDisplay = (props: any) => {
             flexDirection: "column",
           }}
         >
-          <h1 style={{ color: "#F93B1D" }}>
-            {" "}
-            {generalInfo?.name} {generalInfo?.surname}{" "}
-          </h1>
-          {generalInfo?.phone_number && (
-            <>
-              <p
+          <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+            <div>
+              <h1 style={{ color: "#F93B1D" }}>
+                {" "}
+                {generalInfo?.name} {generalInfo?.surname}{" "}
+              </h1>
+              {generalInfo?.phone_number && (
+                <>
+                  <p
+                    style={{
+                      marginTop: "30px",
+                      color: "#7E7E7E",
+                      fontSize: "20px",
+                    }}
+                  >
+                    <span style={{ marginRight: "10px" }}>{element2}</span>
+                    {generalInfo?.phone_number}
+                  </p>
+                </>
+              )}
+              {generalInfo?.email && (
+                <>
+                  <p style={{ color: "#7E7E7E", fontSize: "20px" }}>
+                    <span style={{ marginRight: "10px" }}>{element}</span>{" "}
+                    {generalInfo?.email}
+                  </p>
+                </>
+              )}
+              <div
+                className="about_me"
                 style={{
-                  marginTop: "30px",
-                  color: "#7E7E7E",
-                  fontSize: "20px",
+                  display: "flex",
+                  flexDirection: "column",
                 }}
               >
-                <span style={{ marginRight: "10px" }}>{element2}</span>
-                {generalInfo?.phone_number}
-              </p>
-            </>
-          )}
-          {generalInfo?.email && (
-            <>
-              <p style={{ color: "#7E7E7E", fontSize: "20px" }}>
-                <span style={{ marginRight: "10px" }}>{element}</span>{" "}
-                {generalInfo?.email}
-              </p>
-            </>
-          )}
-          <div
-            className="about_me"
-            style={{
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            {generalInfo?.about_me && (
-              <>
-                <h4 style={{ color: "#F93B1D", marginTop: "30px" }}>
-                  ჩემ შესახებ
-                </h4>
-                <p
-                  style={{
-                    marginTop: "10px",
-                    width: "400px",
-                    fontSize: "17px",
-                    fontWeight: "500",
-                    wordWrap: "break-word",
-                    display: "block",
-                  }}
-                >
-                  {" "}
-                  {generalInfo?.about_me}
-                </p>
-              </>
+                {generalInfo?.about_me && (
+                  <>
+                    <h4 style={{ color: "#F93B1D", marginTop: "30px" }}>
+                      ჩემ შესახებ
+                    </h4>
+                    <p
+                      style={{
+                        marginTop: "10px",
+                        width: "400px",
+                        fontSize: "17px",
+                        fontWeight: "500",
+                        wordWrap: "break-word",
+                        display: "block",
+                      }}
+                    >
+                      {" "}
+                      {generalInfo?.about_me}
+                    </p>
+                  </>
+                )}
+              </div>
+            </div>
+            {generalInfo?.image && (
+              <img
+                src={generalInfo?.image}
+                alt="Image"
+                style={{
+                  borderRadius: "50%",
+                  width: "200px",
+                  height: "200px",
+                  objectFit: "cover",
+                }}
+              />
             )}
-            <hr
-              style={{
-                width: "90%",
-                marginTop: "10px",
-              }}
-            />
           </div>
+          <hr
+            style={{
+              width: "90%",
+              marginTop: "10px",
+            }}
+          />
         </div>
-        <img
-          src={generalInfo?.image}
-          alt="Image"
-          style={{
-            borderRadius: "50%",
-            width: "250px",
-            height: "250px",
-            objectFit: "cover",
-            position: "absolute",
-            right: "20px",
-            top: "50px",
-          }}
-        />
-        <div />
       </div>
 
       {experienceFormData !== null && (
@@ -163,7 +174,13 @@ const CVDisplay = (props: any) => {
               </>
             ))}
           </div>
-          <hr />
+          <hr
+            style={{
+              width: "78%",
+              marginTop: "10px",
+              marginLeft: "100px",
+            }}
+          />
         </>
       )}
 
@@ -185,9 +202,18 @@ const CVDisplay = (props: any) => {
                   {" "}
                   {data?.values?.institute}
                   {", "}
-                  {data?.values?.degree}
+                  {data &&
+                    data.values &&
+                    data.values.degree &&
+                    (degrees as any)[data.values.degree - 1]?.title}
                 </p>
-                <p key={data.id + "_due_date"}> {data?.values?.due_date}</p>
+                <p
+                  key={data.id + "_due_date"}
+                  style={{ color: "gray", marginTop: "5px" }}
+                >
+                  {" "}
+                  {data?.values?.due_date}
+                </p>
                 <p key={data.id + "_description"}>
                   {data?.values?.description}
                 </p>

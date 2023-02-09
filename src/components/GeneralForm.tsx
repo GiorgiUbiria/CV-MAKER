@@ -26,8 +26,7 @@ interface FormValues {
 const initialValues = {
   name: "",
   surname: "",
-  image:
-    "https://png.pngtree.com/png-clipart/20191027/ourlarge/pngtree-outline-person-icon-png-image_1869918.jpg",
+  image: "",
   about_me: "",
   email: "",
   phone_number: "",
