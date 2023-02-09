@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 import Form from "../components/ExperienceForm";
 
+import style from "./general.module.css";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
-
-import style from "./general.module.css";
 
 const element = <FontAwesomeIcon icon={faAngleLeft} />;
 

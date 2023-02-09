@@ -1,11 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
+
 import Resume from "../components/Resume";
+import Popup from "../components/Popup";
+
+import style from "./LastPage.module.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
-
-import style from "./LastPage.module.css";
-import Popup from "../components/Popup";
 
 const element = <FontAwesomeIcon icon={faAngleLeft} />;
 

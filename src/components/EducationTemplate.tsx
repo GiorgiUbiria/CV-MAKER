@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 
-import TextField from "@mui/material/TextField";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 import {
+  TextField,
   FormControl,
   FormHelperText,
   FormLabel,
-  InputLabel,
   MenuItem,
   Select,
 } from "@mui/material";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
+
 const element = <FontAwesomeIcon icon={faTriangleExclamation} />;
 
-const validate = (values: any) => {
+const validate = (values: any): {} => {
   const errors: { [key: string]: string } = {};
 
   const { institute, degree, due_date, description, id } = values;
@@ -60,12 +60,13 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
 
   const [isDisabled, setIsDisabled] = useState(true);
 
-  useEffect(() => {
-    setIsDisabled(Object.keys(errors).length !== 0);
-  }, [errors]);
+  const [options, setOptions] = useState([]);
 
-  const handleBlur = (field: string) => () => {
-    setFieldErrors({ ...fieldErrors, [field]: true });
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const handleOptionChange = (event: any) => {
+    setSelectedOption(event.target.value as string);
+    onChange({ target: { name: `degree-${id}`, value: event.target.value } });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -73,18 +74,18 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
     setErrors(validate({ ...values, id }));
   };
 
+  const handleBlur = (field: string) => () => {
+    setFieldErrors({ ...fieldErrors, [field]: true });
+  };
+
+  useEffect(() => {
+    setIsDisabled(Object.keys(errors).length !== 0);
+  }, [errors]);
+
   useEffect(() => {
     setErrors(validate({ ...values, id }));
     disabled(isDisabled);
   }, [values, isDisabled]);
-
-  const [options, setOptions] = useState([]);
-  const [selectedOption, setSelectedOption] = useState("");
-
-  const handleOptionChange = (event: any) => {
-    setSelectedOption(event.target.value as string);
-    onChange({ target: { name: `degree-${id}`, value: event.target.value } });
-  };
 
   useEffect(() => {
     fetch("https://resume.redberryinternship.ge/api/degrees")

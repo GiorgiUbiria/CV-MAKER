@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
 
-import TextField from "@mui/material/TextField";
+import {
+  TextField,
+  FormControl,
+  FormHelperText,
+  FormLabel,
+} from "@mui/material";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
-import { FormControl, FormHelperText, FormLabel, styled } from "@mui/material";
+
 const element = <FontAwesomeIcon icon={faTriangleExclamation} />;
 
-const validate = (values: any, id: any) => {
+const validate = (values: any, id: any): {} => {
   const errors: { [key: string]: string } = {};
 
   const { position, employer, start_date, due_date, description } = values;
@@ -64,11 +69,7 @@ const FormTemplate = ({ id, onChange, values, disabled }: any) => {
 
   const [errors, setErrors] = useState({} as { [key: string]: string });
 
-  const [isDisabled, setIsDisabled] = useState(true);
-
-  useEffect(() => {
-    setIsDisabled(Object.keys(errors).length !== 0);
-  }, [errors]);
+  const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
   const handleBlur = (field: string) => () => {
     setFieldErrors({ ...fieldErrors, [field]: true });
@@ -78,6 +79,10 @@ const FormTemplate = ({ id, onChange, values, disabled }: any) => {
     e.preventDefault();
     setErrors(validate({ ...values }, id));
   };
+
+  useEffect(() => {
+    setIsDisabled(Object.keys(errors).length !== 0);
+  }, [errors]);
 
   useEffect(() => {
     setErrors(validate({ ...values }, id));

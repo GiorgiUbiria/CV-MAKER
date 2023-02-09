@@ -6,12 +6,7 @@ import TextField from "@mui/material/TextField";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
-import {
-  FormControl,
-  FormHelperText,
-  FormLabel,
-  withStyles,
-} from "@mui/material";
+import { FormControl, FormHelperText, FormLabel } from "@mui/material";
 
 const element = <FontAwesomeIcon icon={faTriangleExclamation} />;
 
@@ -37,7 +32,7 @@ const initialValues = {
   phone_number: "",
 };
 
-const validate = (values: FormValues) => {
+const validate = (values: FormValues): {} => {
   const errors: { [key: string]: string } = {};
 
   if (!values.name) {
@@ -84,9 +79,9 @@ const validate = (values: FormValues) => {
 
   if (!values.phone_number) {
     errors.phone_number = "Phone Number is required";
-  } else if (!/^\+995\d{9}$/.test(values.phone_number)) {
+  } else if (!/^\+995\s\d{3}\s\d{2}\s\d{2}\s\d{2}$/.test(values.phone_number)) {
     errors.phone_number =
-      "Invalid Georgian phone number format. Expected format: +995xxxxxxxxx";
+      "Invalid Georgian phone number format. Expected format: +995 xxx xx xx xx";
   } else {
     delete errors.phone_number;
   }
@@ -94,7 +89,7 @@ const validate = (values: FormValues) => {
   return errors;
 };
 
-const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
+const Form: React.FC<FormProps> = ({ onDataFromFields }) => {
   const [fieldErrors, setFieldErrors] = useState({
     name: false,
     surname: false,
@@ -107,12 +102,8 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
     const storedValues = localStorage.getItem("form-data");
     return storedValues ? JSON.parse(storedValues) : initialValues;
   });
-  const [image, setImage] = useState<string>();
-  const [isDisabled, setIsDisabled] = useState(true);
-
-  useEffect(() => {
-    setIsDisabled(Object.keys(errors).length !== 0);
-  }, [errors]);
+  /*   const [image, setImage] = useState<string>(); */
+  const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
   const navigate = useNavigate();
 
@@ -120,15 +111,11 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
     navigate("/experience");
   };
 
-  const handleBlur = (field: string) => () => {
-    setFieldErrors({ ...fieldErrors, [field]: true });
-  };
-
   const handleImageChange = (e: any) => {
     const reader = new FileReader();
     reader.onload = (e) => {
       const dataURL = e.target?.result as string;
-      setImage(dataURL);
+      /*       setImage(dataURL); */
       setValues({ ...values, image: dataURL });
     };
     reader.readAsDataURL(e.target.files[0]);
@@ -145,6 +132,14 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
     e.preventDefault();
     setErrors(validate(values));
   };
+
+  const handleBlur = (field: string) => () => {
+    setFieldErrors({ ...fieldErrors, [field]: true });
+  };
+
+  useEffect(() => {
+    setIsDisabled(Object.keys(errors).length !== 0);
+  }, [errors]);
 
   useEffect(() => {
     localStorage.setItem("form-data", JSON.stringify(values));
@@ -298,7 +293,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
           color="success"
           style={{ width: "70%" }}
           onBlur={handleBlur("phone_number")}
-          placeholder="+995551012307"
+          placeholder="+995 551 01 23 07"
         />
         <FormHelperText style={{ marginLeft: "-2px" }}>
           უნდა აკმაყოფილებდეს ქართული მობილური ნომრის ფორმატს

@@ -1,8 +1,11 @@
-import { useNavigate } from "react-router-dom";
-import EducationTemplate from "./EducationTemplate";
-import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
+
+import EducationTemplate from "./EducationTemplate";
+
+import Button from "@mui/material/Button";
 
 interface FormProps extends React.HTMLAttributes<HTMLFormElement> {
   onDataFromFields: (data: any) => void;
@@ -25,14 +28,11 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
 
   const [buttonDisabled, setButtonDisabled] = useState(true);
 
-  const addForm = () => {
-    setEducation([
-      ...education,
-      { id: education.length, values: initialValues },
-    ]);
-  };
-
   const navigate = useNavigate();
+
+  const handleBackButtonClick = () => {
+    navigate("/experience");
+  };
 
   const handleForwardButtonClick = async () => {
     function dataURLtoFile(dataurl: string, filename: string): File {
@@ -60,7 +60,10 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
     formData.append("about_me", generalInfo.about_me);
     formData.append("email", generalInfo.email);
     formData.append("name", generalInfo.name);
-    formData.append("phone_number", generalInfo.phone_number);
+    formData.append(
+      "phone_number",
+      generalInfo.phone_number.replace(/\s/g, "")
+    );
     formData.append("surname", generalInfo.surname);
     formData.append("image", file, "image.png");
 
@@ -126,10 +129,6 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
     }
   };
 
-  const handleBackButtonClick = () => {
-    navigate("/experience");
-  };
-
   const handleChange = (event: any, formId: number) => {
     const newForms = education.map((form: any) => {
       if (form.id === formId) {
@@ -145,6 +144,13 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
     });
     setEducation(newForms);
     onDataFromFields(education);
+  };
+
+  const addForm = () => {
+    setEducation([
+      ...education,
+      { id: education.length, values: initialValues },
+    ]);
   };
 
   useEffect(() => {

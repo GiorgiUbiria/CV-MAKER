@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 import Form from "../components/EducationForm";
 
+import style from "./general.module.css";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
-
-import style from "./general.module.css";
 
 const element = <FontAwesomeIcon icon={faAngleLeft} />;
 
@@ -58,9 +58,7 @@ const Education = ({ handleEducationData, page }: any) => {
           {page.current + 2}/3{" "}
         </span>
         <hr className={style.general_hr} />
-        <Form
-          onDataFromFields={handleDataFromFields}
-        />
+        <Form onDataFromFields={handleDataFromFields} />
       </div>
     </div>
   );

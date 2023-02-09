@@ -37,7 +37,16 @@ const Resume = () => {
               }}
             >
               <span style={{ marginRight: "10px" }}>{element2}</span>
-              {data?.phone_number}
+              {"+" +
+                data?.phone_number.slice(1, 4) +
+                " " +
+                data?.phone_number.slice(4, 7) +
+                " " +
+                data?.phone_number.slice(7, 9) +
+                " " +
+                data?.phone_number.slice(9, 11) +
+                " " +
+                data?.phone_number.slice(11, 13)}
             </p>
 
             <p style={{ color: "#7E7E7E", fontSize: "20px" }}>

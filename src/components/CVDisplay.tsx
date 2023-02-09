@@ -7,10 +7,9 @@ const element = <FontAwesomeIcon icon={faAt} />;
 const element2 = <FontAwesomeIcon icon={faPhone} />;
 
 const CVDisplay = (props: any) => {
-  const [degrees, setDegrees] = useState();
-
-  console.log(degrees);
   const { fieldValues, experienceData, educationData } = props;
+
+  const [degrees, setDegrees] = useState();
 
   const [generalInfo, setGeneralInfo] = useState(() => {
     const generalData = localStorage.getItem("form-data");

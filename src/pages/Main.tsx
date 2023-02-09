@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+
 import style from "./main.module.css";
 
 export const Main = () => {

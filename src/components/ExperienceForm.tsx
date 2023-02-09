@@ -1,7 +1,9 @@
-import { useNavigate } from "react-router-dom";
-import FormTemplate from "./FormTemplate";
-import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import FormTemplate from "./FormTemplate";
+
+import Button from "@mui/material/Button";
 
 interface FormProps extends React.HTMLAttributes<HTMLFormElement> {
   onDataFromFields: (data: any) => void;
@@ -25,18 +27,14 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
 
   const [buttonDisabled, setButtonDisabled] = useState(true);
 
-  const addForm = () => {
-    setForms([...forms, { id: forms.length, values: initialValues }]);
-  };
-
   const navigate = useNavigate();
-
-  const handleForwardButtonClick = () => {
-    navigate("/education");
-  };
 
   const handleBackButtonClick = () => {
     navigate("/general_information");
+  };
+
+  const handleForwardButtonClick = () => {
+    navigate("/education");
   };
 
   const handleChange = (event: any, formId: number) => {
@@ -54,6 +52,10 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
     });
     setForms(newForms);
     onDataFromFields(forms);
+  };
+
+  const addForm = () => {
+    setForms([...forms, { id: forms.length, values: initialValues }]);
   };
 
   useEffect(() => {
