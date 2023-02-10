@@ -140,25 +140,40 @@ const FormTemplate = ({ id, onChange, values }: any) => {
       </FormControl>
 
       <div className="date_inputs" style={{ display: "flex", gap: "170px" }}>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <span style={{ fontSize: "18px", marginBottom: "5px" }}>
-            დაწყების თარიღი
-          </span>
-          <input
-            type="date"
-            name={`start_date-${id}`}
-            id="start_date"
-            onChange={onChange}
-            value={values.start_date}
-            style={{
-              height: "50px",
-              borderRadius: "5px",
-              border: "1px solid gray",
-              backgroundColor: "#f9f9f9",
-              width: "220px",
-            }}
-            onBlur={handleBlur("start_date")}
-          />
+        <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <span style={{ fontSize: "18px", marginBottom: "5px" }}>
+              დაწყების თარიღი
+            </span>
+            <input
+              type="date"
+              name={`start_date-${id}`}
+              id="start_date"
+              onChange={onChange}
+              value={values.start_date}
+              style={{
+                height: "50px",
+                borderRadius: "5px",
+                border: "1px solid gray",
+                backgroundColor: "#f9f9f9",
+                width: "220px",
+              }}
+              onBlur={handleBlur("start_date")}
+            />
+          </div>
+          {errors[`start_date-${id}`] && (
+            <div
+              style={{
+                width: "50px",
+                color: "red",
+                position: "relative",
+                left: "20px",
+                top: "43px",
+              }}
+            >
+              {element}
+            </div>
+          )}
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
@@ -181,6 +196,19 @@ const FormTemplate = ({ id, onChange, values }: any) => {
             onBlur={handleBlur("due_date")}
           />
         </div>
+        {errors[`due_date-${id}`] && (
+          <div
+            style={{
+              width: "50px",
+              color: "red",
+              position: "relative",
+              right: "150px",
+              top: "43px",
+            }}
+          >
+            {element}
+          </div>
+        )}
       </div>
 
       <FormControl required>
