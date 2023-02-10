@@ -102,8 +102,6 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }) => {
     const storedValues = localStorage.getItem("form-data");
     return storedValues ? JSON.parse(storedValues) : initialValues;
   });
-  /*   const [image, setImage] = useState<string>(); */
-  const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
   const navigate = useNavigate();
 
@@ -115,7 +113,6 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }) => {
     const reader = new FileReader();
     reader.onload = (e) => {
       const dataURL = e.target?.result as string;
-      /*       setImage(dataURL); */
       setValues({ ...values, image: dataURL });
     };
     reader.readAsDataURL(e.target.files[0]);
@@ -136,10 +133,6 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }) => {
   const handleBlur = (field: string) => () => {
     setFieldErrors({ ...fieldErrors, [field]: true });
   };
-
-  useEffect(() => {
-    setIsDisabled(Object.keys(errors).length !== 0);
-  }, [errors]);
 
   useEffect(() => {
     localStorage.setItem("form-data", JSON.stringify(values));
@@ -239,6 +232,19 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }) => {
             }}
           />
         </div>
+        {errors.image && (
+          <div
+            style={{
+              width: "50px",
+              color: "red",
+              position: "absolute",
+              right: "250px",
+              top: "40px",
+            }}
+          >
+            {element}
+          </div>
+        )}
       </FormControl>
 
       <FormControl>
@@ -309,7 +315,6 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }) => {
           marginLeft: "480px",
         }}
         onClick={handleButtonClick}
-        disabled={isDisabled}
       >
         შემდეგი
       </Button>

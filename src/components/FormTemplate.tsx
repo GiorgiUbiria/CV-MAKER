@@ -58,7 +58,7 @@ const validate = (values: any, id: any): {} => {
   return errors;
 };
 
-const FormTemplate = ({ id, onChange, values, disabled }: any) => {
+const FormTemplate = ({ id, onChange, values }: any) => {
   const [fieldErrors, setFieldErrors] = useState({
     position: false,
     employer: false,
@@ -68,8 +68,6 @@ const FormTemplate = ({ id, onChange, values, disabled }: any) => {
   });
 
   const [errors, setErrors] = useState({} as { [key: string]: string });
-
-  const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
   const handleBlur = (field: string) => () => {
     setFieldErrors({ ...fieldErrors, [field]: true });
@@ -81,13 +79,8 @@ const FormTemplate = ({ id, onChange, values, disabled }: any) => {
   };
 
   useEffect(() => {
-    setIsDisabled(Object.keys(errors).length !== 0);
-  }, [errors]);
-
-  useEffect(() => {
     setErrors(validate({ ...values }, id));
-    disabled(isDisabled);
-  }, [values, isDisabled]);
+  }, [values]);
 
   return (
     <form
@@ -108,8 +101,10 @@ const FormTemplate = ({ id, onChange, values, disabled }: any) => {
           name={`position-${id}`}
           value={values.position}
           onChange={onChange}
-          error={!!errors.position && fieldErrors.position}
-          helperText={fieldErrors.position && errors.position ? element : null}
+          error={!!errors[`position-${id}`] && fieldErrors.position}
+          helperText={
+            fieldErrors.position && errors[`position-${id}`] ? element : null
+          }
           color="success"
           onBlur={handleBlur("position")}
           style={{
@@ -130,8 +125,10 @@ const FormTemplate = ({ id, onChange, values, disabled }: any) => {
           name={`employer-${id}`}
           value={values.employer}
           onChange={onChange}
-          error={!!errors.employer && fieldErrors.employer}
-          helperText={fieldErrors.employer && errors.employer ? element : null}
+          error={!!errors[`employer-${id}`] && fieldErrors.employer}
+          helperText={
+            fieldErrors.employer && errors[`employer-${id}`] ? element : null
+          }
           color="success"
           style={{ width: "70%" }}
           onBlur={handleBlur("employer")}
@@ -196,6 +193,12 @@ const FormTemplate = ({ id, onChange, values, disabled }: any) => {
           onChange={onChange}
           style={{ width: "70%" }}
           onBlur={handleBlur("description")}
+          error={!!errors[`description-${id}`] && fieldErrors.description}
+          helperText={
+            fieldErrors.description && errors[`description-${id}`]
+              ? element
+              : null
+          }
           color="success"
           multiline
           placeholder="როლი თანამდებობაზე და ზოგადი აღწერა"

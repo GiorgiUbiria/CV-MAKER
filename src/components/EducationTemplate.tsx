@@ -34,9 +34,9 @@ const validate = (values: any): {} => {
   }
 
   if (!due_date) {
-    errors[`degree-${id}`] = "due_date is required";
+    errors[`due_date-${id}`] = "due_date is required";
   } else {
-    delete errors[`degree-${id}`];
+    delete errors[`due_date-${id}`];
   }
 
   if (!description) {
@@ -112,9 +112,9 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
           name={`institute-${id}`}
           value={values.institute}
           onChange={onChange}
-          error={!!errors.institute && fieldErrors.institute}
+          error={!!errors[`institute-${id}`] && fieldErrors.institute}
           helperText={
-            fieldErrors.institute && errors.institute ? element : null
+            fieldErrors.institute && errors[`institute-${id}`] ? element : null
           }
           color="success"
           onBlur={handleBlur("institute")}
@@ -153,23 +153,38 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
           </Select>
         </FormControl>
 
-        <input
-          type="date"
-          name={`due_date-${id}`}
-          id="due_date"
-          onChange={onChange}
-          value={values.due_date}
-          style={{
-            width: "30%",
-            marginRight: "260px",
-            height: "65px",
-            borderRadius: "5px",
-            border: "1px solid gray",
-            marginTop: "25px",
-            backgroundColor: "#f9f9f9",
-          }}
-          onBlur={handleBlur("due_date")}
-        />
+        <div style={{ display: "flex" }}>
+          <input
+            type="date"
+            name={`due_date-${id}`}
+            id="due_date"
+            onChange={onChange}
+            value={values.due_date}
+            style={{
+              width: "100%",
+              marginRight: "260px",
+              height: "65px",
+              borderRadius: "5px",
+              border: "1px solid gray",
+              marginTop: "25px",
+              backgroundColor: "#f9f9f9",
+            }}
+            onBlur={handleBlur("due_date")}
+          />
+          {errors[`due_date-${id}`] && (
+            <div
+              style={{
+                width: "50px",
+                color: "red",
+                position: "relative",
+                right: "250px",
+                top: "45px",
+              }}
+            >
+              {element}
+            </div>
+          )}
+        </div>
       </div>
 
       <FormControl required>
@@ -180,9 +195,11 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
           name={`description-${id}`}
           value={values.description}
           onChange={onChange}
-          error={!!errors.description && fieldErrors.description}
+          error={!!errors[`description-${id}`] && fieldErrors.description}
           helperText={
-            fieldErrors.description && errors.description ? element : null
+            fieldErrors.description && errors[`description-${id}`]
+              ? element
+              : null
           }
           color="success"
           style={{ width: "70%" }}

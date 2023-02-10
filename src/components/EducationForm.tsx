@@ -183,7 +183,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
         <Button
           style={{
             alignSelf: "flex-start",
-            marginLeft: "240px",
+            marginLeft: "245px",
             marginTop: "30px",
           }}
           onClick={addForm}
@@ -205,7 +205,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
               width: "15%",
               backgroundColor: "#6B40E3",
               marginBottom: "20px",
-              marginLeft: "250px",
+              marginLeft: "245px",
             }}
             onClick={handleBackButtonClick}
           >
@@ -217,7 +217,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
               width: "15%",
               backgroundColor: "#6B40E3",
               marginBottom: "20px",
-              marginRight: "260px",
+              marginRight: "255px",
             }}
             onClick={handleForwardButtonClick}
             disabled={buttonDisabled}

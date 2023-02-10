@@ -57,7 +57,13 @@ const CVDisplay = (props: any) => {
             flexDirection: "column",
           }}
         >
-          <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-evenly",
+              marginRight: "40px",
+            }}
+          >
             <div>
               <h1 style={{ color: "#F93B1D" }}>
                 {" "}
