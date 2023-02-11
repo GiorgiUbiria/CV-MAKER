@@ -6,7 +6,7 @@ export const Main = () => {
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
-    navigate("/general_information");
+    navigate("/CV-MAKER/general_information");
   };
 
   return (
