@@ -24,7 +24,7 @@ const Experience = ({ handleExperienceData, page }: any) => {
   return (
     <div className={style.container}>
       <Link
-        to="/"
+        to="/CV-MAKER"
         style={{
           fontSize: "28px",
           color: "#1a1a1a",

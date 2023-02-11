@@ -31,7 +31,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
   const navigate = useNavigate();
 
   const handleBackButtonClick = () => {
-    navigate("/experience");
+    navigate("/CV-MAKER/experience");
   };
 
   const handleForwardButtonClick = async () => {
@@ -48,8 +48,12 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
       return new File([u8arr], filename, { type: mime });
     }
 
-    const generalInfo = JSON.parse(sessionStorage.getItem("form-data") as string);
-    const experienceInfo = JSON.parse(sessionStorage.getItem("forms") as string);
+    const generalInfo = JSON.parse(
+      sessionStorage.getItem("form-data") as string
+    );
+    const experienceInfo = JSON.parse(
+      sessionStorage.getItem("forms") as string
+    );
     const educationInfo = JSON.parse(
       sessionStorage.getItem("education") as string
     );
@@ -123,7 +127,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
       sessionStorage.removeItem("education");
       sessionStorage.removeItem("forms");
       sessionStorage.removeItem("form-data");
-      navigate("/cvs");
+      navigate("/CV-MAKER/cvs");
     } catch (error) {
       console.log(error);
     }

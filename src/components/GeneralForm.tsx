@@ -106,7 +106,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }) => {
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
-    navigate("/experience");
+    navigate("/CV-MAKER/experience");
   };
 
   const handleImageChange = (e: any) => {

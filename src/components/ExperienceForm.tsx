@@ -28,11 +28,11 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
   const navigate = useNavigate();
 
   const handleBackButtonClick = () => {
-    navigate("/general_information");
+    navigate("/CV-MAKER/general_information");
   };
 
   const handleForwardButtonClick = () => {
-    navigate("/education");
+    navigate("/CV-MAKER/education");
   };
 
   const handleChange = (event: any, formId: number) => {

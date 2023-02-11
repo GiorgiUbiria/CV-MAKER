@@ -36,9 +36,9 @@ function App() {
   return (
     <div className={style.app}>
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route path="/CV-MAKER" element={<Main />} />
         <Route
-          path="/general_information"
+          path="/CV-MAKER/general_information"
           element={
             <GeneralInformation
               handleData={handleDataFromFields}
@@ -47,7 +47,7 @@ function App() {
           }
         />
         <Route
-          path="/experience"
+          path="/CV-MAKER/experience"
           element={
             <Experience
               handleExperienceData={handleDataFromExperience}
@@ -56,7 +56,7 @@ function App() {
           }
         />
         <Route
-          path="/education"
+          path="/CV-MAKER/education"
           element={
             <Education
               handleEducationData={handleDataFromEducation}
@@ -64,9 +64,9 @@ function App() {
             />
           }
         />
-        <Route path="/cvs" element={<LastPage />} />
+        <Route path="/CV-MAKER/cvs" element={<LastPage />} />
       </Routes>
-      {location.pathname !== "/" && location.pathname !== "/cvs" && (
+      {location.pathname !== "/CV-MAKER" && location.pathname !== "/CV-MAKER/cvs" && (
         <div className={style.cv}>
           <CVDisplay
             fieldValues={handleData}
