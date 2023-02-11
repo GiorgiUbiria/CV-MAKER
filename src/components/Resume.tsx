@@ -8,13 +8,13 @@ const element2 = <FontAwesomeIcon icon={faPhone} />;
 
 const Resume = () => {
   const [data, setData] = useState(() => {
-    const storedValues = localStorage.getItem("finalData");
+    const storedValues = sessionStorage.getItem("finalData");
     return storedValues ? JSON.parse(storedValues) : null;
   });
 
   useEffect(() => {
     const finalResults = JSON.parse(
-      localStorage.getItem("finalResults") as string
+      sessionStorage.getItem("finalResults") as string
     );
     setData(finalResults);
   }, []);

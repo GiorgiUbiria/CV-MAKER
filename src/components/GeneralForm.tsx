@@ -99,7 +99,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }) => {
   });
   const [errors, setErrors] = useState({} as { [key: string]: string });
   const [values, setValues] = useState(() => {
-    const storedValues = localStorage.getItem("form-data");
+    const storedValues = sessionStorage.getItem("form-data");
     return storedValues ? JSON.parse(storedValues) : initialValues;
   });
 
@@ -135,7 +135,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }) => {
   };
 
   useEffect(() => {
-    localStorage.setItem("form-data", JSON.stringify(values));
+    sessionStorage.setItem("form-data", JSON.stringify(values));
   }, [values]);
 
   useEffect(() => {

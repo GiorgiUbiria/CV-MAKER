@@ -15,7 +15,7 @@ const LastPage = () => {
 
   const handleReset = () => {
     navigate("/");
-    localStorage.clear();
+    sessionStorage.clear();
   };
 
   return (

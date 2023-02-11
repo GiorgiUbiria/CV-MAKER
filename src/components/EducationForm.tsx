@@ -20,7 +20,7 @@ const initialValues = {
 
 const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
   const [education, setEducation] = useState(() => {
-    const educationData = localStorage.getItem("education");
+    const educationData = sessionStorage.getItem("education");
     return educationData
       ? JSON.parse(educationData)
       : [{ id: 0, values: initialValues }];
@@ -48,10 +48,10 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
       return new File([u8arr], filename, { type: mime });
     }
 
-    const generalInfo = JSON.parse(localStorage.getItem("form-data") as string);
-    const experienceInfo = JSON.parse(localStorage.getItem("forms") as string);
+    const generalInfo = JSON.parse(sessionStorage.getItem("form-data") as string);
+    const experienceInfo = JSON.parse(sessionStorage.getItem("forms") as string);
     const educationInfo = JSON.parse(
-      localStorage.getItem("education") as string
+      sessionStorage.getItem("education") as string
     );
     const file = dataURLtoFile(generalInfo.image, "image.png");
 
@@ -119,10 +119,10 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
           },
         }
       );
-      localStorage.setItem("finalResults", JSON.stringify(response.data));
-      localStorage.removeItem("education");
-      localStorage.removeItem("forms");
-      localStorage.removeItem("form-data");
+      sessionStorage.setItem("finalResults", JSON.stringify(response.data));
+      sessionStorage.removeItem("education");
+      sessionStorage.removeItem("forms");
+      sessionStorage.removeItem("form-data");
       navigate("/cvs");
     } catch (error) {
       console.log(error);
@@ -154,7 +154,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
   };
 
   useEffect(() => {
-    localStorage.setItem("education", JSON.stringify(education));
+    sessionStorage.setItem("education", JSON.stringify(education));
     onDataFromFields(education);
   }, [education]);
 

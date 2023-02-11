@@ -12,17 +12,17 @@ const CVDisplay = (props: any) => {
   const [degrees, setDegrees] = useState();
 
   const [generalInfo, setGeneralInfo] = useState(() => {
-    const generalData = localStorage.getItem("form-data");
+    const generalData = sessionStorage.getItem("form-data");
     return generalData ? JSON.parse(generalData) : fieldValues;
   });
 
   const [experienceFormData, setExperienceFormData] = useState(() => {
-    const experience = localStorage.getItem("forms");
+    const experience = sessionStorage.getItem("forms");
     return experience ? JSON.parse(experience) : experienceData;
   });
 
   const [educationFormData, setEducationFormData] = useState(() => {
-    const education = localStorage.getItem("education");
+    const education = sessionStorage.getItem("education");
     return education ? JSON.parse(education) : educationData;
   });
 
@@ -33,16 +33,16 @@ const CVDisplay = (props: any) => {
   }, []);
 
   useEffect(() => {
-    setGeneralInfo(JSON.parse(localStorage.getItem("form-data") as string));
+    setGeneralInfo(JSON.parse(sessionStorage.getItem("form-data") as string));
   }, [fieldValues]);
 
   useEffect(() => {
-    setExperienceFormData(JSON.parse(localStorage.getItem("forms") as string));
+    setExperienceFormData(JSON.parse(sessionStorage.getItem("forms") as string));
   }, [experienceData]);
 
   useEffect(() => {
     setEducationFormData(
-      JSON.parse(localStorage.getItem("education") as string)
+      JSON.parse(sessionStorage.getItem("education") as string)
     );
   }, [educationData]);
 

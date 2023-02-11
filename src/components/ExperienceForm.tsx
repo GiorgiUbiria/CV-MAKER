@@ -19,7 +19,7 @@ const initialValues = {
 
 const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
   const [forms, setForms] = useState(() => {
-    const experienceData = localStorage.getItem("forms");
+    const experienceData = sessionStorage.getItem("forms");
     return experienceData
       ? JSON.parse(experienceData)
       : [{ id: 0, values: initialValues }];
@@ -57,7 +57,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
   };
 
   useEffect(() => {
-    localStorage.setItem("forms", JSON.stringify(forms));
+    sessionStorage.setItem("forms", JSON.stringify(forms));
     onDataFromFields(forms);
   }, [forms]);
 
