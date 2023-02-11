@@ -50,6 +50,11 @@
   font-size: 20px;
 }
 
+.add_resume_btn:hover {
+  transform: scale(1.1);
+  box-shadow: 1px 1px 4px black;
+}
+
 .background_logo {
   position: relative;
   top: 80px;
@@ -58,4 +63,14 @@
   left: 20px;
   z-index: -1;
   opacity: 0.5;
+  animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
