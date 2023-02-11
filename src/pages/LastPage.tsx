@@ -14,7 +14,6 @@ const LastPage = () => {
   const navigate = useNavigate();
 
   const handleReset = () => {
-    navigate("/CV-MAKER/");
     sessionStorage.clear();
   };
 
@@ -22,7 +21,7 @@ const LastPage = () => {
     <div className={style.finalForm}>
       <Link
         onClick={handleReset}
-        to="/"
+        to="/CV-MAKER/"
         style={{
           fontSize: "28px",
           color: "#1a1a1a",
