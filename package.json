@@ -1,14 +1,14 @@
 {
-  "homepage": "http://giorgiubiria.github.io/CV-MAKER",
+  "homepage": "http://GiorgiUbiria.github.io/CV-MAKER",
   "name": "cv-creator",
   "private": true,
   "version": "0.0.0",
   "type": "commonjs",
   "scripts": {
     "dev": "vite",
+    "build": "tsc && vite build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "build": "tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
