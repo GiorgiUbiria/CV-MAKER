@@ -21,6 +21,8 @@ const validate = (values: any): {} => {
 
   if (!institute) {
     errors[`institute-${id}`] = "Institute is required";
+  } else if (institute.length < 2) {
+    errors[`institute-${id}`] = "Institute must be at least 2 characters long";
   } else if (institute.charAt(0) === " ") {
     errors[`institute-${id}`] = "Institute cannot start with a space";
   } else {
@@ -41,6 +43,9 @@ const validate = (values: any): {} => {
 
   if (!description) {
     errors[`description-${id}`] = "Description is required";
+  } else if (description.length < 2) {
+    errors[`description-${id}`] =
+      "Description must be at least 2 characters long";
   } else {
     delete errors[`description-${id}`];
   }
