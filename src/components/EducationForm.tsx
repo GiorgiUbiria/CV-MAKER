@@ -34,6 +34,9 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
     navigate("/experience");
   };
 
+
+  
+
   const handleForwardButtonClick = async () => {
     function dataURLtoFile(dataurl: string, filename: string): File {
       const arr = dataurl.split(",") as any;
@@ -54,6 +57,8 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
       sessionStorage.getItem("education") as string
     );
     const file = dataURLtoFile(generalInfo.image, "image.png");
+
+    console.log(file);
 
     const formData = new FormData();
 
