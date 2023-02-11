@@ -14,7 +14,7 @@ const LastPage = () => {
   const navigate = useNavigate();
 
   const handleReset = () => {
-    navigate("/CV-MAKER");
+    navigate("/CV-MAKER/");
     sessionStorage.clear();
   };
 

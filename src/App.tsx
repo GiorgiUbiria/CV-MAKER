@@ -66,26 +66,27 @@ function App() {
         />
         <Route path="/CV-MAKER/cvs" element={<LastPage />} />
       </Routes>
-      {location.pathname !== "/CV-MAKER" && location.pathname !== "/CV-MAKER/cvs" && (
-        <div className={style.cv}>
-          <CVDisplay
-            fieldValues={handleData}
-            experienceData={handleExperienceData}
-            educationData={handleEducationData}
-          />
-          <img
-            src="/cv-logo.png"
-            alt="cv_logo"
-            style={{
-              width: "50px",
-              height: "auto",
-              position: "fixed",
-              bottom: "10px",
-              right: "600px",
-            }}
-          />
-        </div>
-      )}
+      {location.pathname !== "/CV-MAKER/" &&
+        location.pathname !== "/CV-MAKER/cvs" && (
+          <div className={style.cv}>
+            <CVDisplay
+              fieldValues={handleData}
+              experienceData={handleExperienceData}
+              educationData={handleEducationData}
+            />
+            <img
+              src="/cv-logo.png"
+              alt="cv_logo"
+              style={{
+                width: "50px",
+                height: "auto",
+                position: "fixed",
+                bottom: "10px",
+                right: "600px",
+              }}
+            />
+          </div>
+        )}
     </div>
   );
 }
