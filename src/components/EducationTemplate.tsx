@@ -201,8 +201,8 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
                 width: "50px",
                 color: "red",
                 position: "relative",
-                left: "280px",
-                bottom: "40px",
+                left: "270px",
+                bottom: "37px",
               }}
             >
               {element}

@@ -180,7 +180,7 @@ const FormTemplate = ({ id, onChange, values }: any) => {
                 color: "red",
                 position: "relative",
                 left: "10px",
-                top: "40px",
+                top: "43px",
               }}
             >
               {element}
@@ -217,7 +217,7 @@ const FormTemplate = ({ id, onChange, values }: any) => {
               color: "red",
               position: "relative",
               right: "135px",
-              top: "40px",
+              top: "43px",
             }}
           >
             {element}

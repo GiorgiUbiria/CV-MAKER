@@ -277,8 +277,8 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }) => {
               width: "50px",
               color: "red",
               position: "absolute",
-              right: "250px",
-              top: "40px",
+              right: "255px",
+              top: "35px",
             }}
           >
             {element}
