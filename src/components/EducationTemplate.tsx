@@ -156,6 +156,19 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
               </MenuItem>
             ))}
           </Select>
+          {errors[`degree-${id}`] && (
+            <div
+              style={{
+                width: "50px",
+                color: "red",
+                position: "relative",
+                left: "280px",
+                bottom: "40px",
+              }}
+            >
+              {element}
+            </div>
+          )}
         </FormControl>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
@@ -185,8 +198,8 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
                 width: "50px",
                 color: "red",
                 position: "relative",
-                right: "250px",
-                top: "45px",
+                left: "190px",
+                bottom: "40px",
               }}
             >
               {element}
@@ -215,19 +228,6 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
           multiline
           placeholder="განათლების აღწერა"
         />
-        {errors[`degree-${id}`] && (
-          <div
-            style={{
-              width: "50px",
-              color: "red",
-              position: "relative",
-              left: "280px",
-              bottom: "195px",
-            }}
-          >
-            {element}
-          </div>
-        )}
       </FormControl>
     </form>
   );
