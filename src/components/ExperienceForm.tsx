@@ -64,7 +64,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
   return (
     <div
       className="experience_form"
-      style={{ display: "flex", flexDirection: "column" }}
+      style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
     >
       {forms.map((form: any) => (
         <>
@@ -74,7 +74,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
             onChange={(event: any) => handleChange(event, form.id)}
             values={form.values}
           />
-          <hr style={{ marginTop: "70px" }} />
+          <hr style={{ marginTop: "15px" }} />
         </>
       ))}
 

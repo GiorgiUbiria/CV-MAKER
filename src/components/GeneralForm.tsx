@@ -181,11 +181,18 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }) => {
       style={{
         display: "flex",
         flexDirection: "column",
-        gap: "3rem",
+        gap: "2.5rem",
         marginLeft: "250px",
       }}
     >
-      <div className="name_fields" style={{ display: "flex", gap: "3.5rem" }}>
+      <div
+        className="name_fields"
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          width: "70%",
+        }}
+      >
         <FormControl required>
           <FormLabel style={{ color: "black", marginBottom: "5px" }}>
             სახელი
@@ -235,7 +242,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }) => {
             color: "black",
             fontSize: "24px",
             position: "relative",
-            top: "35px",
+            top: "28px",
           }}
         >
           პირადი ფოტოს ატვირთვა

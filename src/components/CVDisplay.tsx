@@ -37,7 +37,9 @@ const CVDisplay = (props: any) => {
   }, [fieldValues]);
 
   useEffect(() => {
-    setExperienceFormData(JSON.parse(sessionStorage.getItem("forms") as string));
+    setExperienceFormData(
+      JSON.parse(sessionStorage.getItem("forms") as string)
+    );
   }, [experienceData]);
 
   useEffect(() => {
@@ -65,17 +67,37 @@ const CVDisplay = (props: any) => {
             }}
           >
             <div>
-              <h1 style={{ color: "#F93B1D" }}>
+              <h1
+                style={{
+                  color: "#F93B1D",
+                  fontWeight: "bold",
+                  fontSize: "36px",
+                }}
+              >
                 {" "}
                 {generalInfo?.name} {generalInfo?.surname}{" "}
               </h1>
+              {generalInfo?.email && (
+                <>
+                  <p
+                    style={{
+                      color: "#7E7E7E",
+                      fontSize: "20px",
+                      marginTop: "30px",
+                    }}
+                  >
+                    <span style={{ marginRight: "10px" }}>{element}</span>{" "}
+                    {generalInfo?.email}
+                  </p>
+                </>
+              )}
               {generalInfo?.phone_number && (
                 <>
                   <p
                     style={{
-                      marginTop: "30px",
                       color: "#7E7E7E",
                       fontSize: "20px",
+                      marginTop: "10px",
                     }}
                   >
                     <span style={{ marginRight: "10px" }}>{element2}</span>
@@ -83,14 +105,7 @@ const CVDisplay = (props: any) => {
                   </p>
                 </>
               )}
-              {generalInfo?.email && (
-                <>
-                  <p style={{ color: "#7E7E7E", fontSize: "20px" }}>
-                    <span style={{ marginRight: "10px" }}>{element}</span>{" "}
-                    {generalInfo?.email}
-                  </p>
-                </>
-              )}
+
               <div
                 className="about_me"
                 style={{
@@ -100,14 +115,21 @@ const CVDisplay = (props: any) => {
               >
                 {generalInfo?.about_me && (
                   <>
-                    <h4 style={{ color: "#F93B1D", marginTop: "30px" }}>
+                    <h4
+                      style={{
+                        color: "#F93B1D",
+                        marginTop: "30px",
+                        fontWeight: "bold",
+                        fontSize: "26px",
+                      }}
+                    >
                       ჩემ შესახებ
                     </h4>
                     <p
                       style={{
-                        marginTop: "10px",
+                        marginTop: "15px",
                         width: "400px",
-                        fontSize: "17px",
+                        fontSize: "20px",
                         fontWeight: "500",
                         wordWrap: "break-word",
                         display: "block",
@@ -153,26 +175,42 @@ const CVDisplay = (props: any) => {
               flexDirection: "column",
             }}
           >
-            <h2 style={{ color: "#F93B1D" }}> გამოცდილება </h2>
+            <h2
+              style={{ color: "#F93B1D", fontWeight: "bold", fontSize: "32px" }}
+            >
+              {" "}
+              გამოცდილება{" "}
+            </h2>
             {experienceFormData?.map((data: any) => (
               <>
                 <h5
-                  style={{ marginTop: "10px", fontSize: "20px" }}
+                  style={{
+                    marginTop: "15px",
+                    fontSize: "20px",
+                    fontWeight: "500",
+                  }}
                   key={data.id + "_position"}
                 >
                   {" "}
-                  {data?.values?.position}, {data?.values?.employer}{" "}
+                  {`${data?.values?.position},`} {data?.values?.employer}{" "}
                 </h5>
                 <p
                   key={data.id + "_start_date"}
-                  style={{ color: "gray", marginTop: "5px" }}
+                  style={{ color: "gray", marginTop: "10px", fontSize: "16px" }}
                 >
                   <i>
                     {" "}
                     {data?.values?.start_date} - {data?.values?.due_date}
                   </i>
                 </p>
-                <p key={data.id + "_description"}>
+                <p
+                  key={data.id + "_description"}
+                  style={{
+                    marginTop: "10px",
+                    fontSize: "20px",
+                    fontWeight: "500",
+                  }}
+                >
                   {data?.values?.description}
                 </p>
                 <br />
@@ -200,10 +238,22 @@ const CVDisplay = (props: any) => {
       >
         {educationFormData !== null && (
           <>
-            <h2 style={{ color: "#F93B1D" }}> განათლება </h2>
+            <h2
+              style={{ color: "#F93B1D", fontWeight: "bold", fontSize: "32px" }}
+            >
+              {" "}
+              განათლება{" "}
+            </h2>
             {educationFormData?.map((data: any) => (
               <>
-                <p style={{ marginTop: "10px" }} key={data.id + "_institute"}>
+                <p
+                  style={{
+                    marginTop: "15px",
+                    fontSize: "20px",
+                    fontWeight: "500",
+                  }}
+                  key={data.id + "_institute"}
+                >
                   {" "}
                   {data?.values?.institute}
                   {", "}
@@ -214,11 +264,18 @@ const CVDisplay = (props: any) => {
                 </p>
                 <p
                   key={data.id + "_due_date"}
-                  style={{ color: "gray", marginTop: "5px" }}
+                  style={{ color: "gray", marginTop: "10px", fontSize: "16px" }}
                 >
                   <i> {data?.values?.due_date}</i>
                 </p>
-                <p key={data.id + "_description"}>
+                <p
+                  key={data.id + "_description"}
+                  style={{
+                    marginTop: "10px",
+                    fontSize: "20px",
+                    fontWeight: "500",
+                  }}
+                >
                   {data?.values?.description}
                 </p>
               </>

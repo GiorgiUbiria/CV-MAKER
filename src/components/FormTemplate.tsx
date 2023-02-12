@@ -93,9 +93,8 @@ const FormTemplate = ({ id, onChange, values }: any) => {
       style={{
         display: "flex",
         flexDirection: "column",
-        gap: "3rem",
+        gap: "2.5rem",
         marginLeft: "250px",
-        marginTop: "15px",
       }}
     >
       <FormControl required>
@@ -144,10 +143,17 @@ const FormTemplate = ({ id, onChange, values }: any) => {
         </FormHelperText>
       </FormControl>
 
-      <div className="date_inputs" style={{ display: "flex", gap: "170px" }}>
+      <div
+        className="date_inputs"
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          width: "80%",
+        }}
+      >
         <div style={{ display: "flex" }}>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <span style={{ fontSize: "18px", marginBottom: "5px" }}>
+            <span style={{ fontSize: "18px", marginBottom: "10px" }}>
               დაწყების თარიღი
             </span>
             <input
@@ -162,6 +168,7 @@ const FormTemplate = ({ id, onChange, values }: any) => {
                 border: "1px solid gray",
                 backgroundColor: "#f9f9f9",
                 width: "220px",
+                fontSize: "16px",
               }}
               onBlur={handleBlur("start_date")}
             />
@@ -172,8 +179,8 @@ const FormTemplate = ({ id, onChange, values }: any) => {
                 width: "50px",
                 color: "red",
                 position: "relative",
-                left: "20px",
-                top: "43px",
+                left: "10px",
+                top: "40px",
               }}
             >
               {element}
@@ -182,7 +189,7 @@ const FormTemplate = ({ id, onChange, values }: any) => {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <span style={{ fontSize: "18px", marginBottom: "5px" }}>
+          <span style={{ fontSize: "18px", marginBottom: "10px" }}>
             დასრულების თარიღი
           </span>
           <input
@@ -197,6 +204,8 @@ const FormTemplate = ({ id, onChange, values }: any) => {
               border: "1px solid gray",
               backgroundColor: "#f9f9f9",
               width: "220px",
+              fontSize: "16px",
+              marginRight: "90px",
             }}
             onBlur={handleBlur("due_date")}
           />
@@ -204,11 +213,11 @@ const FormTemplate = ({ id, onChange, values }: any) => {
         {errors[`due_date-${id}`] && (
           <div
             style={{
-              width: "50px",
+              width: "5px",
               color: "red",
               position: "relative",
-              right: "150px",
-              top: "43px",
+              right: "160px",
+              top: "40px",
             }}
           >
             {element}
@@ -217,7 +226,9 @@ const FormTemplate = ({ id, onChange, values }: any) => {
       </div>
 
       <FormControl required>
-        <FormLabel style={{ color: "black", marginBottom: "5px" }}>
+        <FormLabel
+          style={{ color: "black", marginBottom: "5px", fontSize: "18px" }}
+        >
           აღწერა
         </FormLabel>
         <TextField

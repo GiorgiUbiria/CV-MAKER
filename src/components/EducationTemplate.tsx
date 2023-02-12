@@ -104,7 +104,7 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
       style={{
         display: "flex",
         flexDirection: "column",
-        gap: "3rem",
+        gap: "2.5rem",
         marginLeft: "250px",
         marginTop: "15px",
       }}
@@ -133,7 +133,10 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
 
       <div
         className="fields_container"
-        style={{ display: "flex", justifyContent: "space-between" }}
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+        }}
       >
         <FormControl style={{ width: "30%" }} required>
           <FormLabel style={{ color: "black", marginBottom: "5px" }}>
@@ -162,8 +165,8 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
                 width: "50px",
                 color: "red",
                 position: "relative",
-                left: "280px",
-                bottom: "40px",
+                left: "270px",
+                bottom: "35px",
               }}
             >
               {element}
@@ -182,13 +185,14 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
             onChange={onChange}
             value={values.due_date}
             style={{
-              width: "40%",
-              marginRight: "280px",
-              height: "65px",
+              width: "50%",
+              marginRight: "410px",
+              height: "60px",
               borderRadius: "5px",
               border: "1px solid gray",
               marginTop: "5px",
               backgroundColor: "#f9f9f9",
+              fontSize: "16px",
             }}
             onBlur={handleBlur("due_date")}
           />
@@ -198,7 +202,7 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
                 width: "50px",
                 color: "red",
                 position: "relative",
-                left: "190px",
+                left: "280px",
                 bottom: "40px",
               }}
             >
