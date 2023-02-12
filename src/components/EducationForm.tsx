@@ -34,9 +34,6 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
     navigate("/experience");
   };
 
-
-  
-
   const handleForwardButtonClick = async () => {
     function dataURLtoFile(dataurl: string, filename: string): File {
       const arr = dataurl.split(",") as any;
@@ -51,8 +48,12 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
       return new File([u8arr], filename, { type: mime });
     }
 
-    const generalInfo = JSON.parse(sessionStorage.getItem("form-data") as string);
-    const experienceInfo = JSON.parse(sessionStorage.getItem("forms") as string);
+    const generalInfo = JSON.parse(
+      sessionStorage.getItem("form-data") as string
+    );
+    const experienceInfo = JSON.parse(
+      sessionStorage.getItem("forms") as string
+    );
     const educationInfo = JSON.parse(
       sessionStorage.getItem("education") as string
     );

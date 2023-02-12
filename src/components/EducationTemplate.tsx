@@ -142,7 +142,7 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
           <Select
             id="demo-simple-select"
             value={values.degree ? values.degree : selectedOption}
-            label="Age"
+            label="Degree"
             onChange={handleOptionChange}
             color="success"
             error={!!errors.degree && fieldErrors.degree}
@@ -158,7 +158,10 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
           </Select>
         </FormControl>
 
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <span style={{ fontSize: "16px", marginBottom: "5px" }}>
+            დასრულების თარიღი
+          </span>
           <input
             type="date"
             name={`due_date-${id}`}
@@ -166,12 +169,12 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
             onChange={onChange}
             value={values.due_date}
             style={{
-              width: "100%",
-              marginRight: "260px",
+              width: "40%",
+              marginRight: "280px",
               height: "65px",
               borderRadius: "5px",
               border: "1px solid gray",
-              marginTop: "25px",
+              marginTop: "5px",
               backgroundColor: "#f9f9f9",
             }}
             onBlur={handleBlur("due_date")}
@@ -212,6 +215,19 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
           multiline
           placeholder="განათლების აღწერა"
         />
+        {errors[`degree-${id}`] && (
+          <div
+            style={{
+              width: "50px",
+              color: "red",
+              position: "relative",
+              left: "280px",
+              bottom: "195px",
+            }}
+          >
+            {element}
+          </div>
+        )}
       </FormControl>
     </form>
   );
