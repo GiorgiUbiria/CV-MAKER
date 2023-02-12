@@ -216,7 +216,7 @@ const FormTemplate = ({ id, onChange, values }: any) => {
               width: "5px",
               color: "red",
               position: "relative",
-              right: "160px",
+              right: "135px",
               top: "40px",
             }}
           >

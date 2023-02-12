@@ -185,7 +185,7 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
             value={values.due_date}
             style={{
               width: "50%",
-              marginRight: "410px",
+              marginRight: "385px",
               height: "58px",
               borderRadius: "5px",
               border: "1px solid gray",
