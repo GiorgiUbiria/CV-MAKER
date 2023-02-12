@@ -30,7 +30,7 @@ const Education = ({ handleEducationData, page }: any) => {
           color: "#1a1a1a",
           position: "absolute",
           left: "135px",
-          top: "50px",
+          top: "55px",
         }}
       >
         {element}
