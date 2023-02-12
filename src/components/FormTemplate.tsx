@@ -39,8 +39,13 @@ const validate = (values: any, id: any): {} => {
 
   if (!start_date) {
     errors[`start_date-${id}`] = "start_date is required";
+  } else if (!due_date) {
+    errors[`due_date-${id}`] = "due_date is required";
+  } else if (new Date(start_date) >= new Date(due_date)) {
+    errors[`start_date-${id}`] = "start_date must be less than due_date";
   } else {
     delete errors[`start_date-${id}`];
+    delete errors[`due_date-${id}`];
   }
 
   if (!due_date) {
