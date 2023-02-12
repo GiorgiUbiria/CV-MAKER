@@ -33,8 +33,7 @@ const LastPage = () => {
       >
         {element}
       </Link>
-      <Popup />
-
+      <Popup/>
       <div className={style.cv}>
         <Resume />
       </div>

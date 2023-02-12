@@ -50,7 +50,7 @@ const CVDisplay = (props: any) => {
 
   return (
     <div style={{ minHeight: "100vh" }}>
-      <div className="general_information">
+      <div className="general_information" key={"general"}>
         <div
           style={{
             marginLeft: "100px",
@@ -168,6 +168,7 @@ const CVDisplay = (props: any) => {
         <>
           <div
             className="experience"
+            key={"experience"}
             style={{
               marginLeft: "100px",
               marginTop: "30px",
@@ -229,6 +230,7 @@ const CVDisplay = (props: any) => {
 
       <div
         className="education"
+        key={"education"}
         style={{
           marginLeft: "100px",
           marginTop: "30px",

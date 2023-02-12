@@ -26,8 +26,6 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
       : [{ id: 0, values: initialValues }];
   });
 
-  const [buttonDisabled, setButtonDisabled] = useState(true);
-
   const navigate = useNavigate();
 
   const handleBackButtonClick = () => {
@@ -176,7 +174,6 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
             id={form.id}
             onChange={(event: any) => handleChange(event, form.id)}
             values={form.values}
-            disabled={setButtonDisabled}
           />
           <hr style={{ marginTop: "15px" }} />
         </>
@@ -226,7 +223,6 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
               marginRight: "255px",
             }}
             onClick={handleForwardButtonClick}
-            disabled={buttonDisabled}
           >
             დასრულება
           </Button>

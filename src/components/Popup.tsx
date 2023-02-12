@@ -1,49 +1,44 @@
-import { useState, Fragment } from "react";
+import { useState } from "react";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
-
-const element = <FontAwesomeIcon icon={faXmark} />;
+import { Alert, Snackbar } from "@mui/material";
 
 const Popup = () => {
-  const [showPopup, setShowPopup] = useState(false);
+  const [open, setOpen] = useState({
+    opened: true,
+    vertical: "top",
+    horizontal: "right",
+  });
+
+  const { vertical, horizontal, opened } = open;
+
+  const handleClose = () => {
+    setOpen({ ...open, opened: false });
+  };
 
   return (
-    <Fragment>
-      {showPopup && (
-        <div
-          className="popup"
-          style={{
-            width: "350px",
-            height: "100px",
-            backgroundColor: "white",
-            position: "fixed",
-            top: "10px",
-            right: "20px",
-            borderRadius: "7px",
-            boxShadow: "2px 2px 6px grey",
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          <p style={{ fontSize: "24px", marginLeft: "10px" }}>
-            რეზიუმე წარმატებით გაიგზავნა 🎉
-          </p>
-          <button
-            onClick={() => setShowPopup(false)}
-            style={{
-              position: "relative",
-              right: "20px",
-              bottom: "20px",
-              backgroundColor: "white",
-              border: "none",
-            }}
-          >
-            {element}
-          </button>
-        </div>
-      )}
-    </Fragment>
+    <Snackbar
+      open={opened}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      autoHideDuration={6000}
+      onClose={handleClose}
+      key={vertical + horizontal}
+    >
+      <Alert
+        onClose={handleClose}
+        severity="success"
+        sx={{ width: "100%" }}
+        style={{
+          backgroundColor: "white",
+          height: "80px",
+          fontSize: "20px",
+          boxShadow: "0px 2px 4px #000",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        რეზიუმე წარმატებით გაიგზავნა
+      </Alert>
+    </Snackbar>
   );
 };
 

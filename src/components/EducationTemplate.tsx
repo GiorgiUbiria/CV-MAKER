@@ -53,7 +53,7 @@ const validate = (values: any): {} => {
   return errors;
 };
 
-const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
+const EducationTemplate = ({ id, onChange, values }: any) => {
   const [fieldErrors, setFieldErrors] = useState({
     institute: false,
     degree: false,
@@ -62,8 +62,6 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
   });
 
   const [errors, setErrors] = useState({} as { [key: string]: string });
-
-  const [isDisabled, setIsDisabled] = useState(true);
 
   const [options, setOptions] = useState([]);
 
@@ -84,13 +82,8 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
   };
 
   useEffect(() => {
-    setIsDisabled(Object.keys(errors).length !== 0);
-  }, [errors]);
-
-  useEffect(() => {
     setErrors(validate({ ...values, id }));
-    disabled(isDisabled);
-  }, [values, isDisabled]);
+  }, [values]);
 
   useEffect(() => {
     fetch("https://resume.redberryinternship.ge/api/degrees")
