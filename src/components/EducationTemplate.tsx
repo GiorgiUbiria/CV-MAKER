@@ -106,7 +106,6 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
         flexDirection: "column",
         gap: "2.5rem",
         marginLeft: "250px",
-        marginTop: "15px",
       }}
     >
       <FormControl required>
@@ -187,7 +186,7 @@ const EducationTemplate = ({ id, onChange, values, disabled }: any) => {
             style={{
               width: "50%",
               marginRight: "410px",
-              height: "60px",
+              height: "58px",
               borderRadius: "5px",
               border: "1px solid gray",
               marginTop: "5px",

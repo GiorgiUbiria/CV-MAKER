@@ -153,7 +153,7 @@ const FormTemplate = ({ id, onChange, values }: any) => {
       >
         <div style={{ display: "flex" }}>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <span style={{ fontSize: "18px", marginBottom: "10px" }}>
+            <span style={{ fontSize: "16px", marginBottom: "10px" }}>
               დაწყების თარიღი
             </span>
             <input
@@ -189,7 +189,7 @@ const FormTemplate = ({ id, onChange, values }: any) => {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <span style={{ fontSize: "18px", marginBottom: "10px" }}>
+          <span style={{ fontSize: "16px", marginBottom: "10px" }}>
             დასრულების თარიღი
           </span>
           <input
