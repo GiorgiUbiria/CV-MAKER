@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Form from "../components/GeneralForm";
 
@@ -12,6 +12,12 @@ const element = <FontAwesomeIcon icon={faAngleLeft} />;
 
 const GeneralInformation = ({ handleData, page }: any) => {
   const [dataFromField, setDataFromField] = useState(null);
+  const navigate = useNavigate();
+
+  const handleReset = () => {
+    navigate("/", { replace: true });
+    sessionStorage.clear();
+  };
 
   const handleDataFromFields = (data: any) => {
     setDataFromField(data);
@@ -25,6 +31,7 @@ const GeneralInformation = ({ handleData, page }: any) => {
     <div className={style.container}>
       <Link
         to="/"
+        onClick={handleReset}
         style={{
           fontSize: "28px",
           color: "#1a1a1a",

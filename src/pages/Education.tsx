@@ -15,7 +15,7 @@ const Education = ({ handleEducationData, page }: any) => {
   const navigate = useNavigate();
 
   const handleReset = () => {
-    navigate("/");
+    navigate("/", { replace: true });
     sessionStorage.clear();
   };
 

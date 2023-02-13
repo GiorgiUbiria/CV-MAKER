@@ -14,7 +14,7 @@ const LastPage = () => {
   const navigate = useNavigate();
 
   const handleReset = () => {
-    navigate("/");
+    navigate("/", { replace: true });
     sessionStorage.clear();
   };
 
@@ -33,7 +33,7 @@ const LastPage = () => {
       >
         {element}
       </Link>
-      <Popup/>
+      <Popup />
       <div className={style.cv}>
         <Resume />
       </div>
