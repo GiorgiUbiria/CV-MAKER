@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAt } from "@fortawesome/free-solid-svg-icons";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
+import { Form } from "react-router-dom";
 
 const element = <FontAwesomeIcon icon={faAt} />;
 const element2 = <FontAwesomeIcon icon={faPhone} />;
@@ -183,7 +184,7 @@ const CVDisplay = (props: any) => {
               გამოცდილება{" "}
             </h2>
             {experienceFormData?.map((data: any) => (
-              <>
+              <div key={data.id + "experience"}>
                 <h5
                   style={{
                     marginTop: "15px",
@@ -205,7 +206,7 @@ const CVDisplay = (props: any) => {
                   </i>
                 </p>
                 <p
-                  key={data.id + "_description"}
+                  key={data.id + "experience_description"}
                   style={{
                     marginTop: "10px",
                     fontSize: "20px",
@@ -215,7 +216,7 @@ const CVDisplay = (props: any) => {
                   {data?.values?.description}
                 </p>
                 <br />
-              </>
+              </div>
             ))}
           </div>
           <hr
@@ -239,7 +240,7 @@ const CVDisplay = (props: any) => {
         }}
       >
         {educationFormData !== null && (
-          <>
+          <div>
             <h2
               style={{ color: "#F93B1D", fontWeight: "bold", fontSize: "32px" }}
             >
@@ -247,7 +248,7 @@ const CVDisplay = (props: any) => {
               განათლება{" "}
             </h2>
             {educationFormData?.map((data: any) => (
-              <>
+              <div key={data.id + "education"}>
                 <p
                   style={{
                     marginTop: "15px",
@@ -271,7 +272,7 @@ const CVDisplay = (props: any) => {
                   <i> {data?.values?.due_date}</i>
                 </p>
                 <p
-                  key={data.id + "_description"}
+                  key={data.id + "education_description"}
                   style={{
                     marginTop: "10px",
                     fontSize: "20px",
@@ -280,9 +281,9 @@ const CVDisplay = (props: any) => {
                 >
                   {data?.values?.description}
                 </p>
-              </>
+              </div>
             ))}
-          </>
+          </div>
         )}
       </div>
     </div>

@@ -168,7 +168,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
       style={{ display: "flex", flexDirection: "column" }}
     >
       {education.map((form: any) => (
-        <>
+        <div key={form.id + "_education"}>
           <EducationTemplate
             key={form.id}
             id={form.id}
@@ -176,7 +176,7 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
             values={form.values}
           />
           <hr style={{ marginTop: "15px" }} />
-        </>
+        </div>
       ))}
 
       <div

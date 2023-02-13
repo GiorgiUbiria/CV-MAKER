@@ -136,7 +136,7 @@ const EducationTemplate = ({ id, onChange, values }: any) => {
           </FormLabel>
           <Select
             id="demo-simple-select"
-            value={values.degree ? values.degree : selectedOption}
+            value={values?.degree ? values?.degree : selectedOption}
             label="Degree"
             onChange={handleOptionChange}
             color="success"
@@ -145,9 +145,9 @@ const EducationTemplate = ({ id, onChange, values }: any) => {
             <MenuItem disabled value="">
               <em>აირჩიეთ ხარისხი</em>
             </MenuItem>
-            {options.map((option: any) => (
-              <MenuItem key={option.id} value={option.id}>
-                {option.title}
+            {options?.map((option: any) => (
+              <MenuItem key={option?.id} value={option?.id}>
+                {option?.title}
               </MenuItem>
             ))}
           </Select>
