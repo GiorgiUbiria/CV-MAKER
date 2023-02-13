@@ -122,18 +122,12 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }) => {
     let formattedNumber = text;
 
     const input = formattedNumber.replace(/\D/g, "").substring(0, 13);
-    console.log(`input - ${input}`);
 
     const areaCode = input.substring(0, 3);
-    console.log(`areaCode - ${areaCode}`);
     const middle = input.substring(3, 6);
-    console.log(`middle = ${middle}`);
     const last1 = input.substring(6, 8);
-    console.log(`last 1 - ${last1}`);
     const last2 = input.substring(8, 10);
-    console.log(`last 2 - ${last2}`);
     const last3 = input.substring(10, 12);
-    console.log(`last 3 - ${last3}`);
 
     if (input.length > 10) {
       formattedNumber = `+${areaCode} ${middle} ${last1} ${last2} ${last3}`;
