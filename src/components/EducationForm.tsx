@@ -57,8 +57,6 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
     );
     const file = dataURLtoFile(generalInfo.image, "image.png");
 
-    console.log(file);
-
     const formData = new FormData();
 
     formData.append("about_me", generalInfo.about_me);
@@ -114,16 +112,15 @@ const Form: React.FC<FormProps> = ({ onDataFromFields }: any) => {
     });
 
     try {
-      const response = await axios.post(
+      const response = await fetch(
         "https://resume.redberryinternship.ge/api/cvs",
-        formData,
         {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
+          method: "POST",
+          body: formData,
         }
       );
-      sessionStorage.setItem("finalResults", JSON.stringify(response.data));
+      const data = await response.json();
+      sessionStorage.setItem("finalResults", JSON.stringify(data));
       sessionStorage.removeItem("education");
       sessionStorage.removeItem("forms");
       sessionStorage.removeItem("form-data");
